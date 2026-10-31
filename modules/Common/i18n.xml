@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<root>
+    <node name="lang">
+        <value lang="en">en</value>
+        <value lang="pl">pl</value>
+    </node>
+</root>
