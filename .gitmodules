@@ -1,3 +1,9 @@
 [submodule "modules/Core"]
 	path = modules/Core
 	url = https://github.com/GreenCodeStudio/GreenCodeFramework-Core.git
+[submodule "modules/Authorization"]
+	path = modules/Authorization
+	url = https://github.com/GreenCodeStudio/GreenCodeFramework-Authorization.git
+[submodule "modules/LogCollector"]
+	path = modules/LogCollector
+	url = https://github.com/GreenCodeStudio/GreenCodeFramework-LogCollector.git

@@ -1,0 +1,52 @@
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+var path = require('path');
+module.exports = {
+    entry: {
+        main: './jsBuild.js',
+        workers: './jsWorkersBuild.js',
+        serviceWorker: './modules/Core/js/serviceWorker.js',
+    }, output: {
+        path: path.resolve(__dirname, './public_html') + '/dist/',
+        publicPath: "/dist/",
+        filename: '[name].js',
+        chunkFilename: '[contenthash].js'
+    },
+    module: {
+        rules: [
+            {
+                test: /\.scss$/,
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    //"style-loader", // creates style nodes from JS strings
+                    "css-loader", // translates CSS into CommonJS
+                    "sass-loader" // compiles Sass to CSS, using Node Sass by default
+                ]
+            },
+            {
+                test: /\.css$/,
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    //"style-loader", // creates style nodes from JS strings
+                    "css-loader", // translates CSS into CommonJS
+                ]
+            },
+            {
+                test: /\.(woff(2)?|ttf|eoty)(\?v=\d+\.\d+\.\d+)?$/,
+                use: [{
+                    loader: 'file-loader',
+                    options: {
+                        name: '[name].[ext]',
+                        outputPath: '/fonts/'
+                    }
+                }]
+            }, {
+                test: /i18n\.xml$/,
+                use: ["@green-code-studio/internationalization/i18nWebpackLoader"]
+            }, {
+                test: /\.mpts$/,
+                use: ["mpts-loader"]
+            }
+            ]
+    },
+    plugins: [new MiniCssExtractPlugin()],
+};

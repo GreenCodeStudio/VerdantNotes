@@ -8,3 +8,4 @@ jsWorkersBuild.js
 jsBuild.js
 public_html
 .env.local
+package.json
