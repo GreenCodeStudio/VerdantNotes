@@ -1,0 +1,10 @@
+.idea/
+node_modules/
+vendor/
+cache/
+tmp/
+scssBuild.scss
+jsWorkersBuild.js
+jsBuild.js
+public_html
+.env.local

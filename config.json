@@ -1,0 +1,7 @@
+{
+    "packages":  {
+                     "Core":  "https://gitlab.com/MateuszKrawczyk/framework_core.git",
+                     "Authorization":  "https://github.com/GreenCodeStudio/GreenCodeFramework-Authorization.git",
+                     "LogCollector":  "https://github.com/GreenCodeStudio/GreenCodeFramework-LogCollector.git"
+                 }
+}
