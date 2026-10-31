@@ -4,6 +4,8 @@ namespace VerdantPage\Controllers;
 
 use Common\PageStandardController;
 use Core\Exceptions\NotFoundException;
+use VerdantPage\Exporters\DocxExporter;
+use VerdantPage\Exporters\RtfExporter;
 use VerdantPage\VerdantPage;
 
 class VerdantPageController extends PageStandardController
@@ -15,6 +17,73 @@ class VerdantPageController extends PageStandardController
 
         dump($page);
         $this->addView('VerdantPage', 'VerdantPage', ['page' => $page, 'showNode' => fn($x) => $this->showNode($x)]);
+    }
+
+    public function pdf(string $id)
+    {
+        $page = (new VerdantPage())->getToShow($id);
+        if (!$page) throw new NotFoundException();
+        ob_end_clean();
+        header('Content-Type: application/pdf');
+        echo "%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Contents 4 0 R /Resources << /Font << /F1 5 0 R >> >> >>
+endobj
+4 0 obj
+<<  >>
+stream
+BT
+/F1 24 Tf
+100 700 Td
+(".$page->title.") Tj
+ET
+endstream
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+xref
+0 6
+0000000000 65535 f 
+000000000. 00000 n 
+000000009 00000 n 
+000000058 00000 n 
+000000173 00000 n 
+000000267 00000 n 
+trailer
+<< /Size 6 /Root 1 0 R >>
+startxref
+349
+%%EOF";
+        ob_end_flush();
+        exit;
+    }
+
+    public function rtf(string $id)
+    {
+        $page = (new VerdantPage())->getToShow($id);
+        if (!$page) throw new NotFoundException();
+        ob_end_clean();
+        header('Content-Type: application/rtf');
+        RtfExporter::export($page);
+        ob_end_flush();
+        exit;
+    }
+    public function docx(string $id)
+    {
+        $page = (new VerdantPage())->getToShow($id);
+        if (!$page) throw new NotFoundException();
+        ob_end_clean();
+        header('Content-Type: application/vnd.openxmlformats-officedocument.wordprocessingml.document');
+        DocxExporter::export($page);
+        ob_end_flush();
+        exit;
     }
 
     private function showNode($node)

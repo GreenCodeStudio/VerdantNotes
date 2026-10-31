@@ -3,4 +3,7 @@
     <:foreach collection=page.nodes item=node>
         << showNode(node) >>
     </:foreach>
+    <a href="/VerdantPage/rtf/":page.id class="nativeLink">Download RTF</a>
+    <a href="/VerdantPage/pdf/":page.id class="nativeLink">Download PDF</a>
+    <a href="/VerdantPage/docx/":page.id class="nativeLink">Download Word</a>
 </article>
