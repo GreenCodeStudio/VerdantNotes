@@ -15,8 +15,8 @@ class VerdantPageController extends PageStandardController
         $page = (new VerdantPage())->getToShow($id);
         if (!$page) throw new NotFoundException();
 
-        dump($page);
-        $this->addView('VerdantPage', 'VerdantPage', ['page' => $page, 'showNode' => fn($x) => $this->showNode($x)]);
+        $canEdit = $page->public_permissions_edit;
+        $this->addView('VerdantPage', 'VerdantPage', ['page' => $page, 'showNode' => fn($x) => $this->showNode($x, $canEdit), 'canEdit' => $canEdit]);
     }
 
     public function pdf(string $id)
@@ -75,6 +75,7 @@ startxref
         ob_end_flush();
         exit;
     }
+
     public function docx(string $id)
     {
         $page = (new VerdantPage())->getToShow($id);
@@ -86,10 +87,12 @@ startxref
         exit;
     }
 
-    private function showNode($node)
+    private function showNode($node, bool $canEdit)
     {
-        dump($node);
         if ($node->type === 'text/plain') {
+            if ($canEdit) {
+                return '<section data-node="'.htmlspecialchars(json_encode($node)).'">'.htmlspecialchars($node->content->text).'</section>';
+            }
             return '<section>'.htmlspecialchars($node->content->text).'</section>';
         }
     }

@@ -1,9 +1,14 @@
-<article>
+<article data-can-edit=canEdit class="verdantPageArticle">
+    <:if condition=canEdit>
+        <button class="editBtn">Edit</button>
+    </:if>
+
+    <a href="/VerdantPage/rtf/":page.id class="nativeLink">Download RTF</a>
+    <a href="/VerdantPage/pdf/":page.id class="nativeLink">Download PDF</a>
+    <a href="/VerdantPage/docx/":page.id class="nativeLink">Download Word</a>
+
     <h1>{{page.title}}</h1>
     <:foreach collection=page.nodes item=node>
         << showNode(node) >>
     </:foreach>
-    <a href="/VerdantPage/rtf/":page.id class="nativeLink">Download RTF</a>
-    <a href="/VerdantPage/pdf/":page.id class="nativeLink">Download PDF</a>
-    <a href="/VerdantPage/docx/":page.id class="nativeLink">Download Word</a>
 </article>

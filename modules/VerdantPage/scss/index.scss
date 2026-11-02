@@ -1,0 +1,15 @@
+.verdantPageArticle {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 16px;
+
+    section {
+        margin: 16px 0;
+        &[contenteditable="true"] {
+            &:hover, &:focus, &:focus-within {
+                outline: 1px solid #ccc;
+                outline-offset: 8px;
+            }
+        }
+    }
+}

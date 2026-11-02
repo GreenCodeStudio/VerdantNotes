@@ -7,3 +7,6 @@
 [submodule "modules/LogCollector"]
 	path = modules/LogCollector
 	url = https://github.com/GreenCodeStudio/GreenCodeFramework-LogCollector.git
+[submodule "modules/User"]
+	path = modules/User
+	url = https://github.com/GreenCodeStudio/GreenCodeFramework-UserOpen.git
