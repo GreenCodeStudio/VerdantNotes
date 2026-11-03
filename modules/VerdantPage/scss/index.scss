@@ -11,5 +11,19 @@
                 outline-offset: 8px;
             }
         }
+        &.newPlainTextNode{
+            opacity: 0.5;
+            &:focus, &:focus-within {
+                opacity: 1;
+            }
+        }
+    }
+}
+.ribbon{
+    .ribbon-tab{
+        background: #eee;
+        padding: 8px;
+        gap: 8px;
+        display: flex;
     }
 }

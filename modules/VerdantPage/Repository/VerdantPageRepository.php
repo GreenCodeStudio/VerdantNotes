@@ -26,5 +26,14 @@ class VerdantPageRepository
         return $item;
     }
 
+    public function insert(string $pageId)
+    {
+        DB::insert('verdant_page', ['id' => $pageId]);
+    }
 
+    public function insertDetails(array $array)
+    {
+        DB::insert('verdant_page_details', $array);
+        DB::update('verdant_page', ['details_id' => $array['id']], $array['page_id']);
+    }
 }

@@ -7,12 +7,16 @@ use VerdantPage\VerdantPage;
 
 class VerdantPageAjax extends \Core\AjaxController
 {
-    public function updateNode(string $nodeId, string $previousVersionId, $content)
+    public function updateNode(string $nodeId, ?string $previousVersionId, string $type, $content, string $pageId)
     {
         $canEdit = (new VerdantPage())->canEditNode($nodeId);
         if (!$canEdit) {
             throw new UnauthorizedException();
         }
-        (new VerdantPage())->updateNode($nodeId, $previousVersionId, $content);
+        (new VerdantPage())->updateNode($nodeId, $previousVersionId, $type, $content, $pageId);
+    }
+    public function createNewPage(string $pageId)
+    {
+        (new VerdantPage())->createNewPage($pageId);
     }
 }
