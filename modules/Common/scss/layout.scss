@@ -10,7 +10,13 @@ body {
     min-height: 100vh;
     margin: 0;
     padding: 0;
-
+>header{
+    background: #ccc8;
+    h1{
+        margin: 0;font-size: 1em;
+        padding: 8px;
+    }
+}
     > main {
         flex-grow: 1;
     }

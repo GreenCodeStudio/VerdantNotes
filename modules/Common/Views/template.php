@@ -28,13 +28,8 @@ use Core\Formatter;
 <body>
 <header>
     <h1>Verdant Notes</h1>
-
 </header>
 <main data-views="main"><?php $this->showViews('main'); ?></main>
-<aside>
-    <h3>Moje notesy</h3>
-    <p>Zaloguj się aby zobaczyć swoje notesy.</p>
-</aside>
 <footer>
     <p class="footerLine">
         Verdant Notes
