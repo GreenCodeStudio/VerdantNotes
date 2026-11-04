@@ -31,7 +31,7 @@ use Core\Formatter;
     <?php
     if (empty($userData)) {
         ?>
-        <a href="/Authorization" class="button">Login</a>
+        <a href="/Authorization" class="login-button">Login/Register</a>
         <?php
     } else {
         ?>
