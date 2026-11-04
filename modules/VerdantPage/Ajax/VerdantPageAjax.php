@@ -15,8 +15,8 @@ class VerdantPageAjax extends \Core\AjaxController
         }
         (new VerdantPage())->updateNode($nodeId, $previousVersionId, $type, $content, $pageId);
     }
-    public function createNewPage(string $pageId)
+    public function createNewPage(string $pageId, ?string $notebookId = null)
     {
-        (new VerdantPage())->createNewPage($pageId);
+        (new VerdantPage())->createNewPage($pageId, $notebookId);
     }
 }

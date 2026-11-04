@@ -46,21 +46,14 @@
             <null>YES</null>
         </column>
         <column>
+            <name>notebook_id</name>
+            <type>char(36)</type>
+            <null>NO</null>
+        </column>
+        <column>
             <name>title</name>
             <type>text</type>
             <null>yes</null>
-        </column>
-        <column>
-            <name>public_permissions_read</name>
-            <type>boolean</type>
-            <null>NO</null>
-            <default>0</default>
-        </column>
-        <column>
-            <name>public_permissions_edit</name>
-            <type>boolean</type>
-            <null>NO</null>
-            <default>0</default>
         </column>
         <index>
             <type>PRIMARY</type>
@@ -85,6 +78,13 @@
             <type>FOREIGN</type>
             <element>previous_details_id</element>
             <reference name="verdant_page_details">
+                <element>id</element>
+            </reference>
+        </index>
+        <index>
+            <type>FOREIGN</type>
+            <element>notebook_id</element>
+            <reference name="verdant_notebook">
                 <element>id</element>
             </reference>
         </index>
@@ -163,6 +163,60 @@
             <reference name="verdant_page">
                 <element>id</element>
             </reference>
+        </index>
+    </table>
+    <table>
+        <name>verdant_notebook</name>
+        <column>
+            <name>id</name>
+            <type>char(36)</type>
+            <null>NO</null>
+        </column>
+        <column>
+            <name>name</name>
+            <type>text</type>
+            <null>YES</null>
+        </column>
+        <column>
+            <name>owner_id</name>
+            <type>int</type>
+            <null>YES</null>
+        </column>
+        <column>
+            <name>owner_token</name>
+            <type>varchar(255)</type>
+            <null>YES</null>
+        </column>
+        <column>
+            <name>public_permissions_read</name>
+            <type>boolean</type>
+            <null>NO</null>
+            <default>0</default>
+        </column>
+        <column>
+            <name>public_permissions_edit</name>
+            <type>boolean</type>
+            <null>NO</null>
+            <default>0</default>
+        </column>
+        <index>
+            <type>PRIMARY</type>
+            <element>id</element>
+        </index>
+        <index>
+            <type>INDEX</type>
+            <element>owner_id</element>
+        </index>
+        <index>
+            <type>FOREIGN</type>
+            <element>owner_id</element>
+            <reference name="user">
+                <element>id</element>
+            </reference>
+        </index>
+        <index>
+            <type>INDEX</type>
+            <element>owner_token</element>
         </index>
     </table>
 </root>

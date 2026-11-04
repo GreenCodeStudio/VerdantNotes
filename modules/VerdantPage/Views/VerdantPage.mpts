@@ -1,39 +1,55 @@
-<div class="ribbon">
-    <section class="ribbon-tab">
-<!--        <section>-->
-<!--            <h3>Notes</h3>-->
-<!--            <button class="add-notebook-button">Utwórz notes</button>-->
-<!--        </section>-->
-<!--        <section>-->
-<!--            <h3>Strona</h3>-->
-<!--            <button class="add-page-button">Utwórz stronę</button>-->
-<!--        </section>-->
-        <section>
-            <h3>Edit</h3>
-            <:if condition=canEdit>
-                <button class="editBtn">Edit</button>
-            </:if>
-            <:else>
-                <p>You don't have permission to edit this page.</p>
-            </:else>
-        </section>
-        <:if condition=page.id >
+<div class="verdantPageWrapper">
+    <div class="ribbon">
+        <section class="ribbon-tab">
+    <!--        <section>-->
+    <!--            <h3>Notes</h3>-->
+    <!--            <button class="add-notebook-button">Utwórz notes</button>-->
+    <!--        </section>-->
+    <!--        <section>-->
+    <!--            <h3>Strona</h3>-->
+    <!--            <button class="add-page-button">Utwórz stronę</button>-->
+    <!--        </section>-->
             <section>
-                <h3>Eksport</h3>
-                <a href="/VerdantPage/rtf/":page.id class="nativeLink button">Download RTF</a>
-                <a href="/VerdantPage/pdf/":page.id class="nativeLink button">Download PDF</a>
-                <a href="/VerdantPage/docx/":page.id class="nativeLink button">Download Word</a>
+                <h3>Edit</h3>
+                <:if condition=canEdit>
+                    <button class="editBtn">Edit</button>
+                </:if>
+                <:else>
+                    <p>You don't have permission to edit this page.</p>
+                </:else>
             </section>
-        </:if>
-        <section>
-            <h3>Help</h3>
-            <a href="/VerdantPage/show/f603d4af-11a9-4174-a824-4078520042cc" class="button">About</a>
+            <:if condition=page.id >
+                <section>
+                    <h3>Eksport</h3>
+                    <a href="/VerdantPage/rtf/":page.id class="nativeLink button">Download RTF</a>
+                    <a href="/VerdantPage/pdf/":page.id class="nativeLink button">Download PDF</a>
+                    <a href="/VerdantPage/docx/":page.id class="nativeLink button">Download Word</a>
+                </section>
+            </:if>
+            <section>
+                <h3>Help</h3>
+                <a href="/VerdantPage/show/f603d4af-11a9-4174-a824-4078520042cc" class="button">About</a>
+            </section>
         </section>
-    </section>
+    </div>
+    <article data-can-edit=canEdit class="verdantPageArticle" data-id=page.id >
+        <h1>{{page.title}}</h1>
+        <:foreach collection=page.nodes item=node>
+            << showNode(node) >>
+        </:foreach>
+    </article>
+    <aside>
+        <h1>
+            {{page.notebook_name}}
+        </h1>
+        <ul>
+            <:foreach collection=page.notebookPages item=notebookPage>
+                <li>
+                    <a href="/VerdantPage/show/":notebookPage.id >
+                                          {{notebookPage.title}}
+                                   </a>
+                </li>
+            </:foreach>
+        </ul>
+    </aside>
 </div>
-<article data-can-edit=canEdit class="verdantPageArticle" data-id=page.id >
-    <h1>{{page.title}}</h1>
-    <:foreach collection=page.nodes item=node>
-        << showNode(node) >>
-    </:foreach>
-</article>

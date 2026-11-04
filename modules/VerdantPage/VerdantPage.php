@@ -2,7 +2,9 @@
 
 namespace VerdantPage;
 
+use Authorization\Authorization;
 use Common\Guid;
+use VerdantPage\Repository\VerdantNotebookRepository;
 use VerdantPage\Repository\VerdantPageNodeRepository;
 use VerdantPage\Repository\VerdantPageRepository;
 
@@ -59,8 +61,12 @@ class VerdantPage
         ];
     }
 
-    public function createNewPage(string $pageId)
+    public function createNewPage(string $pageId, ?string $notebookId = null)
     {
+        if($notebookId===null){
+            $notebookId = Guid::create();
+            (new VerdantNotebookRepository())->insert(['id' => $notebookId, 'owner_id'=>Authorization::getUserId()]);
+        }
         $repository = (new VerdantPageRepository());
         $repository->insert($pageId);
         $repository->insertDetails(

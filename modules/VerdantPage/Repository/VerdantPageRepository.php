@@ -10,9 +10,10 @@ class VerdantPageRepository
 
     public function getToShow(string $id)
     {
-        $item = DB::get("SELECT vp.id, vpd.title, vpd.public_permissions_read, vpd.public_permissions_edit
+        $item = DB::get("SELECT vp.id, vpd.title, vn.public_permissions_read, vn.public_permissions_edit, vn.name as notebook_name, vn.id as notebook_id
         FROM verdant_page vp
         JOIN verdant_page_details vpd ON vpd.id = vp.details_id
+        JOIN verdant_notebook vn ON vn.id = vpd.notebook_id
         WHERE vp.id = ?", [$id])[0] ?? null;
         if (!$item) return null;
         $item->nodes = DB::get("SELECT *
@@ -23,6 +24,11 @@ class VerdantPageRepository
             $x->content = json_decode($x->content, false);
             return $x;
         })->toArray();
+        $item->notebookPages=DB::get("SELECT vp.id, vpd.title
+        FROM verdant_notebook vn
+        JOIN verdant_page_details vpd ON vpd.notebook_id = vn.id
+        JOIN verdant_page vp ON vp.details_id = vpd.id
+        WHERE vn.id = ?", [$item->notebook_id]);
         return $item;
     }
 
