@@ -1,19 +1,21 @@
-.mode-start{
-    .passwordLabel{
+.mode-start {
+    .passwordLabel {
         display: none;
     }
-    .btn-login, .btn-register{
-        display: none;
-    }
-}
-.mode-login{
-    .btn-next, .btn-register{
+
+    .btn-login, .btn-register {
         display: none;
     }
 }
 
-.mode-register{
-    .btn-next, .btn-login{
+.mode-login {
+    .btn-next, .btn-register {
+        display: none;
+    }
+}
+
+.mode-register {
+    .btn-next, .btn-login {
         display: none;
     }
 }

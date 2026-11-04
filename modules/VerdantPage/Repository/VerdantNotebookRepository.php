@@ -11,4 +11,11 @@ class VerdantNotebookRepository
     {
         DB::insert('verdant_notebook', $data);
     }
+
+    public function getByOwner($getUserId)
+    {
+        return DB::get("SELECT *
+        FROM verdant_notebook
+        WHERE owner_id = ?", [$getUserId]);
+    }
 }

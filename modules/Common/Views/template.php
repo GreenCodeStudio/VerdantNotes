@@ -26,7 +26,7 @@ use Core\Formatter;
 </head>
 <body>
 <header>
-    <h1>Verdant Notes</h1>
+    <h1><a href="/">Verdant Notes</a></h1>
     <?php
     if (empty($userData)) {
         ?>
@@ -38,6 +38,7 @@ use Core\Formatter;
             <button class="loginInfo-btn"><?= htmlspecialchars($userData->name) ?></button>
             <div class="loginInfo-expandable">
                 <span class="icon-user"><?= htmlspecialchars($userData->name) ?></span>
+                <a href="/VerdantNotebook/my" class="button">Moje notesy</a>
                 <a href="/User/myAccount" class="button">Moje konto</a>
                 <button class="button logoutMyselfBtn" title="Wyloguj">Wyloguj</button>
             </div>

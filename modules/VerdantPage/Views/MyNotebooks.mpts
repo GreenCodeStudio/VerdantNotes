@@ -1,0 +1,9 @@
+<ul>
+    <:foreach collection=notebooks item=notebook>
+        <li>
+            <a href="/VerdantNotebook/show/":notebook.id >
+                {{notebook.name}}
+            </a>
+        </li>
+    </:foreach>
+</ul>

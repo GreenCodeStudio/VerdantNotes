@@ -7,6 +7,9 @@
     >h1{
         min-height: 1.2em;
         line-height: 1.2;
+        &.placeholder{
+            opacity: 0.5;
+        }
     }
     section {
         margin: 16px 0;
