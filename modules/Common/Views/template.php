@@ -67,46 +67,46 @@ use Core\Formatter;
         <span>•</span>
         <span>NIP: 5741970332, REGON: 387817729</span>
     </p>
-    <div class="languageSelect">
-        <ul>
-            <li><a href="?lang=pl">PL</a></li>
-            <li><a href="?lang=en">EN</a></li>
-            <li><a href="?lang=de">DE</a></li>
-            <li><a href="?lang=fr">FR</a></li>
-            <li><a href="?lang=es">ES</a></li>
-            <li><a href="?lang=it">IT</a></li>
-            <li><a href="?lang=pt">PT</a></li>
-            <li><a href="?lang=ru">RU</a></li>
-            <li><a href="?lang=uk">UK</a></li>
-            <li><a href="?lang=zh">ZH</a></li>
-            <li><a href="?lang=ja">JA</a></li>
-            <li><a href="?lang=ko">KO</a></li>
-            <li><a href="?lang=ar">AR</a></li>
-            <li><a href="?lang=hi">HI</a></li>
-            <li><a href="?lang=cs">CS</a></li>
-            <li><a href="?lang=sk">SK</a></li>
-            <li><a href="?lang=nl">NL</a></li>
-            <li><a href="?lang=tr">TR</a></li>
-            <li><a href="?lang=sv">SV</a></li>
-            <li><a href="?lang=fi">FI</a></li>
-            <li><a href="?lang=da">DA</a></li>
-            <li><a href="?lang=no">NO</a></li>
-            <li><a href="?lang=ro">RO</a></li>
-            <li><a href="?lang=bg">BG</a></li>
-            <li><a href="?lang=el">EL</a></li>
-            <li><a href="?lang=hr">HR</a></li>
-            <li><a href="?lang=sr">SR</a></li>
-            <li><a href="?lang=sl">SL</a></li>
-            <li><a href="?lang=lt">LT</a></li>
-            <li><a href="?lang=hu">HU</a></li>
-            <li><a href="?lang=ua">UA</a></li>
-            <li><a href="?lang=ru">RU</a></li>
-            <li><a href="?lang=gr">GR</a></li>
-            <li><a href="?lang=eo">EO</a></li>
-            <li><a href="?lang=he">HE</a></li>
-            <li><a href="?lang=szl">SZL</a></li>
-        </ul>
-    </div>
+<!--    <div class="languageSelect">-->
+<!--        <ul>-->
+<!--            <li><a href="?lang=pl">PL</a></li>-->
+<!--            <li><a href="?lang=en">EN</a></li>-->
+<!--            <li><a href="?lang=de">DE</a></li>-->
+<!--            <li><a href="?lang=fr">FR</a></li>-->
+<!--            <li><a href="?lang=es">ES</a></li>-->
+<!--            <li><a href="?lang=it">IT</a></li>-->
+<!--            <li><a href="?lang=pt">PT</a></li>-->
+<!--            <li><a href="?lang=ru">RU</a></li>-->
+<!--            <li><a href="?lang=uk">UK</a></li>-->
+<!--            <li><a href="?lang=zh">ZH</a></li>-->
+<!--            <li><a href="?lang=ja">JA</a></li>-->
+<!--            <li><a href="?lang=ko">KO</a></li>-->
+<!--            <li><a href="?lang=ar">AR</a></li>-->
+<!--            <li><a href="?lang=hi">HI</a></li>-->
+<!--            <li><a href="?lang=cs">CS</a></li>-->
+<!--            <li><a href="?lang=sk">SK</a></li>-->
+<!--            <li><a href="?lang=nl">NL</a></li>-->
+<!--            <li><a href="?lang=tr">TR</a></li>-->
+<!--            <li><a href="?lang=sv">SV</a></li>-->
+<!--            <li><a href="?lang=fi">FI</a></li>-->
+<!--            <li><a href="?lang=da">DA</a></li>-->
+<!--            <li><a href="?lang=no">NO</a></li>-->
+<!--            <li><a href="?lang=ro">RO</a></li>-->
+<!--            <li><a href="?lang=bg">BG</a></li>-->
+<!--            <li><a href="?lang=el">EL</a></li>-->
+<!--            <li><a href="?lang=hr">HR</a></li>-->
+<!--            <li><a href="?lang=sr">SR</a></li>-->
+<!--            <li><a href="?lang=sl">SL</a></li>-->
+<!--            <li><a href="?lang=lt">LT</a></li>-->
+<!--            <li><a href="?lang=hu">HU</a></li>-->
+<!--            <li><a href="?lang=ua">UA</a></li>-->
+<!--            <li><a href="?lang=ru">RU</a></li>-->
+<!--            <li><a href="?lang=gr">GR</a></li>-->
+<!--            <li><a href="?lang=eo">EO</a></li>-->
+<!--            <li><a href="?lang=he">HE</a></li>-->
+<!--            <li><a href="?lang=szl">SZL</a></li>-->
+<!--        </ul>-->
+<!--    </div>-->
 </footer>
 <script>
     //<![CDATA[

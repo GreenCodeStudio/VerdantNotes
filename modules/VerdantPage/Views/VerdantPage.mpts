@@ -1,23 +1,30 @@
 <div class="ribbon">
     <section class="ribbon-tab">
-        <section>
-            <h3>Notes</h3>
-            <button class="add-notebook-button">Utwórz notes</button>
-        </section> <section>
-        <h3>Strona</h3>
-        <button class="add-page-button">Utwórz stronę</button>
-    </section>
-        <section>
-            <h3>Eksport</h3>
-            <a href="/VerdantPage/rtf/":page.id class="nativeLink button">Download RTF</a>
-            <a href="/VerdantPage/pdf/":page.id class="nativeLink button">Download PDF</a>
-            <a href="/VerdantPage/docx/":page.id class="nativeLink button">Download Word</a>
-        </section>
+<!--        <section>-->
+<!--            <h3>Notes</h3>-->
+<!--            <button class="add-notebook-button">Utwórz notes</button>-->
+<!--        </section>-->
+<!--        <section>-->
+<!--            <h3>Strona</h3>-->
+<!--            <button class="add-page-button">Utwórz stronę</button>-->
+<!--        </section>-->
         <section>
             <h3>Edit</h3>
             <:if condition=canEdit>
                 <button class="editBtn">Edit</button>
             </:if>
+        </section>
+        <:if condition=page.id >
+            <section>
+                <h3>Eksport</h3>
+                <a href="/VerdantPage/rtf/":page.id class="nativeLink button">Download RTF</a>
+                <a href="/VerdantPage/pdf/":page.id class="nativeLink button">Download PDF</a>
+                <a href="/VerdantPage/docx/":page.id class="nativeLink button">Download Word</a>
+            </section>
+        </:if>
+        <section>
+            <h3>Help</h3>
+            <a href="/VerdantPage/show/f603d4af-11a9-4174-a824-4078520042cc" class="button">About</a>
         </section>
     </section>
 </div>
