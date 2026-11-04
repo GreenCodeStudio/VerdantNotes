@@ -57,15 +57,18 @@ class VerdantPage
             'title' => '',
             'public_permissions_read' => true,
             'public_permissions_edit' => true,
-            'nodes' => []
+            'nodes' => [],
+            'notebookPages' => [],
+            'notebook_id' => null,
+            'notebook_name' => ''
         ];
     }
 
     public function createNewPage(string $pageId, ?string $notebookId = null)
     {
-        if($notebookId===null){
+        if ($notebookId === null) {
             $notebookId = Guid::create();
-            (new VerdantNotebookRepository())->insert(['id' => $notebookId, 'owner_id'=>Authorization::getUserId()]);
+            (new VerdantNotebookRepository())->insert(['id' => $notebookId, 'owner_id' => Authorization::getUserId()]);
         }
         $repository = (new VerdantPageRepository());
         $repository->insert($pageId);
@@ -79,5 +82,15 @@ class VerdantPage
             ]
         );
 
+    }
+
+    public function updateTitle(string $pageId, string $title)
+    {
+        $details = (new VerdantPageRepository())->getCurrentDetails($pageId);
+        $repository = (new VerdantPageRepository());
+        $details->previous_details_id = $details->id;
+        $details->id = Guid::create();
+        $details->title = $title;
+        $repository->insertDetails((array)$details);
     }
 }

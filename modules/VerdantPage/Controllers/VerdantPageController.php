@@ -15,7 +15,7 @@ class VerdantPageController extends PageStandardController
         $page = (new VerdantPage())->getToShow($id);
         if (!$page) throw new NotFoundException();
 
-        $canEdit = $page->public_permissions_edit;
+        $canEdit = $page->public_permissions_edit || $page->notebook_owner_id === \Authorization\Authorization::getUserId();
         $this->addView('VerdantPage', 'VerdantPage', ['page' => $page, 'showNode' => fn($x) => $this->showNode($x, $canEdit), 'canEdit' => $canEdit]);
     }
 

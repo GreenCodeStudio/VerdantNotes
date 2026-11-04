@@ -52,6 +52,31 @@ export class show {
         this.article.append(newPlainTextNode);
         this.page.querySelector('.editBtn').classList.add('active');
         this.page.querySelector('.editBtn').disabled = true;
+        const titleElement = this.page.querySelector('article>h1')
+        titleElement.contentEditable = true;
+        if(titleElement.textContent.trim().length == 0){
+            titleElement.classList.add('placeholder');
+            titleElement.textContent = 'Click here to add a title';
+        }
+        titleElement.onfocus = () => {
+            if(titleElement.classList.contains('placeholder')){
+                titleElement.classList.remove('placeholder');
+                titleElement.textContent = '';
+            }
+        }
+        titleElement.onblur = async () => {
+
+            if (titleElement.textContent.trim().length > 0 && titleElement.textContent != this.data.title) {
+                if (!this.pageId) {
+                    await this.createNewPage();
+                }
+                Ajax.VerdantPage.updateTitle(this.pageId, titleElement.textContent);
+            }
+            if(titleElement.textContent.trim().length == 0){
+                titleElement.classList.add('placeholder');
+                titleElement.textContent = 'Click here to add a title';
+            }
+        }
     }
 
     initNodeEdit(nodeElement) {

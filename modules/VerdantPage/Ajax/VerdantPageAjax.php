@@ -19,4 +19,8 @@ class VerdantPageAjax extends \Core\AjaxController
     {
         (new VerdantPage())->createNewPage($pageId, $notebookId);
     }
+    public function updateTitle(string $pageId, string $title)
+    {
+        (new VerdantPage())->updateTitle($pageId, $title);
+    }
 }

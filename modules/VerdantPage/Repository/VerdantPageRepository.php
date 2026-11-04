@@ -10,7 +10,7 @@ class VerdantPageRepository
 
     public function getToShow(string $id)
     {
-        $item = DB::get("SELECT vp.id, vpd.title, vn.public_permissions_read, vn.public_permissions_edit, vn.name as notebook_name, vn.id as notebook_id
+        $item = DB::get("SELECT vp.id, vpd.title, vn.public_permissions_read, vn.public_permissions_edit, vn.name as notebook_name, vn.id as notebook_id, vn.owner_id as notebook_owner_id
         FROM verdant_page vp
         JOIN verdant_page_details vpd ON vpd.id = vp.details_id
         JOIN verdant_notebook vn ON vn.id = vpd.notebook_id
@@ -41,5 +41,14 @@ class VerdantPageRepository
     {
         DB::insert('verdant_page_details', $array);
         DB::update('verdant_page', ['details_id' => $array['id']], $array['page_id']);
+    }
+
+    public function getCurrentDetails(string $pageId)
+    {
+        return DB::get("SELECT verdant_page_details.*
+        FROM verdant_page_details
+        JOIN verdant_page ON verdant_page.details_id = verdant_page_details.id
+        WHERE verdant_page.id = ?
+        LIMIT 1", [$pageId])[0] ?? null;
     }
 }
