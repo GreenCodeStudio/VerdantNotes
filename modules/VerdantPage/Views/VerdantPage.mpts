@@ -13,6 +13,9 @@
             <:if condition=canEdit>
                 <button class="editBtn">Edit</button>
             </:if>
+            <:else>
+                <p>You don't have permission to edit this page.</p>
+            </:else>
         </section>
         <:if condition=page.id >
             <section>

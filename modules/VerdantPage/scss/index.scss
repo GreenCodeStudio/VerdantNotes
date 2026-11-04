@@ -50,6 +50,14 @@
 
         button, .button {
             @include button;
+            display: flex;
+            align-items: center;
         }
     }
+}
+
+.articleWarning{
+    background: #ff88;
+    padding: 8px;
+    border-bottom: 1px solid #cc2;
 }

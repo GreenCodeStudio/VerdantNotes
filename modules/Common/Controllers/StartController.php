@@ -62,5 +62,9 @@ class StartController extends PageStandardController
 
         }
     }
+    public function index_data()
+    {
+        return ['isUserLoggedIn' => \Authorization\Authorization::isLogged()];
+    }
 }
 

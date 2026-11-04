@@ -96,4 +96,9 @@ startxref
             return '<section>'.htmlspecialchars($node->content->text).'</section>';
         }
     }
+
+    public function show_data()
+    {
+        return ['isUserLoggedIn' => \Authorization\Authorization::isLogged()];
+    }
 }

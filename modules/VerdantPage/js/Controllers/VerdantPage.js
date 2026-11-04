@@ -2,6 +2,8 @@ import {Ajax} from "../../../Core/js/ajax";
 
 export class show {
     constructor(page, data) {
+        this.data = data;
+        this.page = page;
         page.querySelector('.editBtn')?.addEventListener('click', () => {
             this.startEdit();
         });
@@ -26,7 +28,7 @@ export class show {
         }
         newPlainTextNode.onblur = async () => {
             if (newPlainTextNode.textContent.trim().length > 0) {
-                if(!this.pageId){
+                if (!this.pageId) {
                     await this.createNewPage();
                 }
 
@@ -41,13 +43,15 @@ export class show {
                 Ajax.VerdantPage.updateNode(node.node_id, null, node.type, node.content, this.pageId);
                 const nodeElement = document.createElement('section');
                 nodeElement.dataset.node = JSON.stringify(node);
-                nodeElement.textContent= node.content.text;
+                nodeElement.textContent = node.content.text;
                 this.initNodeEdit(nodeElement);
                 this.article.insertBefore(nodeElement, newPlainTextNode);
             }
             newPlainTextNode.textContent = 'Click here to add a new text';
         }
         this.article.append(newPlainTextNode);
+        this.page.querySelector('.editBtn').classList.add('active');
+        this.page.querySelector('.editBtn').disabled = true;
     }
 
     initNodeEdit(nodeElement) {
@@ -104,7 +108,13 @@ export class show {
     }
 
     async createNewPage() {
-        this.pageId=crypto.randomUUID();
+        this.pageId = crypto.randomUUID();
         await Ajax.VerdantPage.createNewPage(this.pageId);
+        if (!this.data.isUserLoggedIn) {
+            const warning = document.createElement('div');
+            warning.classList.add('articleWarning');
+            warning.textContent = 'You are not logged in. Changes will be saved after you log in or create an account.';
+            this.page.insertBefore(warning, this.page.querySelector('article'));
+        }
     }
 }

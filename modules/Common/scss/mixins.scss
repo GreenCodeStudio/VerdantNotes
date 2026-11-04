@@ -13,4 +13,7 @@
     &:hover, &:focus {
         background: #0002;
     }
+    &.active, &:active {
+        background: #0004;
+    }
 }
