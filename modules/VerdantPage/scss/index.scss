@@ -5,30 +5,36 @@
 
     section {
         margin: 16px 0;
+
         &[contenteditable="true"] {
             &:hover, &:focus, &:focus-within {
                 outline: 1px solid #ccc;
                 outline-offset: 8px;
             }
         }
-        &.newPlainTextNode{
+
+        &.newPlainTextNode {
             opacity: 0.5;
+
             &:focus, &:focus-within {
                 opacity: 1;
             }
         }
     }
 }
-.ribbon{
-    .ribbon-tab{
+
+.ribbon {
+    .ribbon-tab {
         background: #eee;
         padding: 8px;
         gap: 8px;
         display: flex;
-        >section{
+
+        > section {
             display: grid;
             grid-template-rows: 1fr 16px;
-            h3{
+
+            h3 {
                 grid-row: 2;
                 font-size: 0.8em;
                 opacity: 0.8;
@@ -36,9 +42,14 @@
                 padding: 0;
                 font-weight: 100;
             }
-            >*{
+
+            > * {
                 grid-row: 1;
             }
+        }
+
+        button, .button {
+            @include button;
         }
     }
 }

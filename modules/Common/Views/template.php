@@ -4,7 +4,7 @@ use Core\Formatter;
 
 ?>
 <!DOCTYPE html>
-<html data-layout="<?=($userData?->preferences["CommonBase.layout"])??'metro'?>" lang="<?=t('Common.lang')?>">
+<html data-layout="<?= ($userData?->preferences["CommonBase.layout"]) ?? 'metro' ?>" lang="<?= t('Common.lang') ?>">
 <head>
     <title><?= htmlspecialchars($this->getTitle()) ?></title>
     <meta charset="UTF-8">
@@ -15,9 +15,9 @@ use Core\Formatter;
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Elms+Sans:ital,wght@0,100..900;1,100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
           rel="stylesheet">
-    <?php foreach ($this->getHeadLinks() ?? [] as $link){
+    <?php foreach ($this->getHeadLinks() ?? [] as $link) {
         echo '<link ';
-        foreach ($link as $key=>$value){
+        foreach ($link as $key => $value) {
             echo htmlspecialchars($key).'="'.htmlspecialchars($value).'" ';
         }
         echo '>';
@@ -28,6 +28,24 @@ use Core\Formatter;
 <body>
 <header>
     <h1>Verdant Notes</h1>
+    <?php
+    if (empty($userData)) {
+        ?>
+        <a href="/Authorization" class="button">Login</a>
+        <?php
+    } else {
+        ?>
+        <div class="loginInfo">
+            <button class="loginInfo-btn"><?= htmlspecialchars($userData->name) ?></button>
+            <div class="loginInfo-expandable">
+                <span class="icon-user"><?= htmlspecialchars($userData->name) ?></span>
+                <a href="/User/myAccount" class="button">Moje konto</a>
+                <button class="button logoutMyselfBtn" title="Wyloguj">Wyloguj</button>
+            </div>
+        </div>
+        <?php
+    }
+    ?>
 </header>
 <main data-views="main"><?php $this->showViews('main'); ?></main>
 <footer>
@@ -93,7 +111,7 @@ use Core\Formatter;
 <script>
     //<![CDATA[
     window.controllerInitInfo = <?=json_encode($this->getInitInfo())?>;
-    window.DEBUG =<?=json_encode($this->isDebug())?>;
+    window.DEBUG = <?=json_encode($this->isDebug())?>;
     //]]>
 </script>
 <script src="/dist/main.js" type="text/javascript"></script>

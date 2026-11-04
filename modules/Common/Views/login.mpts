@@ -1,0 +1,13 @@
+<form class="mode-start">
+    <label>
+        <span>Email</span>
+        <input type="email" name="username"/>
+    </label>
+    <label class="passwordLabel">
+        <span>Password</span>
+        <input type="password" name="password"/>
+    </label>
+    <button class="btn-next">Next</button>
+    <button class="btn-login">Login</button>
+    <button class="btn-register">Register</button>
+</form>

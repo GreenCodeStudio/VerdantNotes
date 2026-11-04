@@ -9,9 +9,9 @@
     </section>
         <section>
             <h3>Eksport</h3>
-            <a href="/VerdantPage/rtf/":page.id class="nativeLink">Download RTF</a>
-            <a href="/VerdantPage/pdf/":page.id class="nativeLink">Download PDF</a>
-            <a href="/VerdantPage/docx/":page.id class="nativeLink">Download Word</a>
+            <a href="/VerdantPage/rtf/":page.id class="nativeLink button">Download RTF</a>
+            <a href="/VerdantPage/pdf/":page.id class="nativeLink button">Download PDF</a>
+            <a href="/VerdantPage/docx/":page.id class="nativeLink button">Download Word</a>
         </section>
         <section>
             <h3>Edit</h3>
