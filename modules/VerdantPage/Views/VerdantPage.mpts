@@ -2,36 +2,46 @@
     <div class="ribbon">
         <section class="ribbon-tab">
             <:if condition=isAuthorized >
-            <section>
+            <section class="ribbon-notebook">
                 <h3>Notes</h3>
-                <button class="addNotebookButton">Utwórz notes</button>
-                <a href="/VerdantNotebook/my" class="myMotebooksButton">Moje notesy</a>
+               <div>
+                <button class="addNotebookButton ">Utwórz notes</button>
+                <a href="/VerdantNotebook/my" class="myMotebooksButton button">Moje notesy</a>
+               </div>
             </section>
             <section>
                 <h3>Strona</h3>
+                <div>
                 <button class="addPageButton">Utwórz stronę</button>
+                </div>
             </section>
             </:if>
             <section>
                 <h3>Edit</h3>
+                <div>
                 <:if condition=canEdit>
                     <button class="editBtn">Edit</button>
                 </:if>
                 <:else>
                     <p>You don't have permission to edit this page.</p>
                 </:else>
+                </div>
             </section>
             <:if condition=page.id >
                 <section>
                     <h3>Eksport</h3>
+                    <div>
                     <a href="/VerdantPage/rtf/":page.id class="nativeLink button">Download RTF</a>
                     <a href="/VerdantPage/pdf/":page.id class="nativeLink button">Download PDF</a>
                     <a href="/VerdantPage/docx/":page.id class="nativeLink button">Download Word</a>
+                    </div>
                 </section>
             </:if>
             <section>
                 <h3>Help</h3>
+                <div>
                 <a href="/VerdantPage/show/f603d4af-11a9-4174-a824-4078520042cc" class="button">About</a>
+                </div>
             </section>
         </section>
     </div>
