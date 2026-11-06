@@ -21,7 +21,7 @@ class VerdantPage
         if (!(new VerdantPageNodeRepository())->exists($nodeId)) {
             return true;
         }
-        return (new VerdantPageNodeRepository())->canEdit($nodeId);
+        return (new VerdantPageNodeRepository())->canEdit($nodeId, Authorization::getUserId());
     }
 
     public function updateNode(?string $nodeId, ?string $previousVersionId, $type, $content, $pageId, $sortOrder)
@@ -50,6 +50,12 @@ class VerdantPage
             }
         }
         return (new VerdantPageNodeRepository())->insertVersion($nodeId, $previousVersionId, $type, $content, $pageId, $sortOrder);
+    }
+    public function deleteNode(string $nodeId)
+    {
+        $node = (new VerdantPageNodeRepository())->get($nodeId);
+        return (new VerdantPageNodeRepository())->insertVersion($nodeId, $node->previousVersionId, $node->type, $node->content, $node->pageId, $node->sortOrder, true);
+
     }
 
     public function getNewEmpty()

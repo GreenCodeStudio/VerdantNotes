@@ -15,6 +15,14 @@ class VerdantPageAjax extends \Core\AjaxController
         }
         (new VerdantPage())->updateNode($nodeId, $previousVersionId, $type, $content, $pageId, $sortOrder);
     }
+    public function deleteNode(string $nodeId)
+    {
+        $canEdit = (new VerdantPage())->canEditNode($nodeId);
+        if (!$canEdit) {
+            throw new UnauthorizedException();
+        }
+        (new VerdantPage())->deleteNode($nodeId);
+    }
     public function createNewPage(string $pageId, ?string $notebookId = null)
     {
         (new VerdantPage())->createNewPage($pageId, $notebookId);

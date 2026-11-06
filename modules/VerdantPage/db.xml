@@ -163,6 +163,12 @@
             <type>bigint</type>
             <null>NO</null>
         </column>
+        <column>
+            <name>isDeleted</name>
+            <type>boolean</type>
+            <null>NO</null>
+            <default>0</default>
+        </column>
         <index>
             <type>PRIMARY</type>
             <element>id</element>

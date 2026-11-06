@@ -25,7 +25,7 @@ export class show {
             pageManager.goto(`/VerdantPage/show/${id}?edit`);
         });
 
-        if('edit' in data._query||sessionStorage.isEditEnabled=='1') {
+        if ('edit' in data._query || sessionStorage.isEditEnabled == '1') {
             this.startEdit();
         }
     }
@@ -58,7 +58,7 @@ export class show {
                         text: newPlainTextNode.textContent
                     }
                 }
-                Ajax.VerdantPage.updateNode(node.node_id, null, node.type, node.content, this.pageId, (getServerDate()/1000)<<16);
+                Ajax.VerdantPage.updateNode(node.node_id, null, node.type, node.content, this.pageId, (getServerDate() / 1000) << 16);
                 const nodeElement = document.createElement('section');
                 nodeElement.dataset.node = JSON.stringify(node);
                 nodeElement.textContent = node.content.text;
@@ -122,6 +122,13 @@ export class show {
                 if (node.content.text != nodeElement.textContent) {
                     node.content.text = nodeElement.textContent;
                     Ajax.VerdantPage.updateNode(node.node_id, node.verdant_page_node_version_id, node.type, node.content, this.pageId);
+                }
+            }
+            nodeElement.onkeydown = e => {
+                if ((e.key == 'Backspace' || e.key == 'Delete') && nodeElement.textContent.length == 0) {
+                    e.preventDefault();
+                    nodeElement.remove();
+                    Ajax.VerdantPage.deleteNode(node.node_id);
                 }
             }
         }

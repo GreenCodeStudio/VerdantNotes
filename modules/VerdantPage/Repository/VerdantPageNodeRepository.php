@@ -8,17 +8,18 @@ use MKrawczyk\FunQuery\FunQuery;
 
 class VerdantPageNodeRepository
 {
-    public function canEdit(string $nodeId)
+    public function canEdit(string $nodeId, ?int $userId = null)
     {
-        return DB::get("SELECT vpd.public_permissions_edit
+        return DB::get("SELECT (vn.public_permissions_edit OR vn.owner_id = ?) as a
         FROM verdant_page_node vpn
         JOIN verdant_page_node_version vpnv ON vpnv.id = vpn.verdant_page_node_version_id
         JOIN verdant_page vp ON vp.id = vpnv.page_id
         JOIN verdant_page_details vpd ON vpd.id = vp.details_id
-        WHERE vpn.id = ?", [$nodeId])[0]->public_permissions_edit ?? false;
+        JOIN verdant_notebook vn ON vn.id = vpd.notebook_id
+        WHERE vpn.id = ?", [$userId, $nodeId])[0]->a ?? false;
     }
 
-    public function insertVersion(string $nodeId, $previousVersion, $type, $content, $pageId, $sortOrder)
+    public function insertVersion(string $nodeId, $previousVersion, $type, $content, $pageId, $sortOrder, bool $isDeleted = false)
     {
         $versionGuid = Guid::create();
         DB::insert('verdant_page_node_version', [
@@ -28,7 +29,8 @@ class VerdantPageNodeRepository
             'previous_version_id' => $previousVersion?->id,
             'type' => $type,
             'page_id' => $pageId,
-            'sortOrder' => $sortOrder
+            'sortOrder' => $sortOrder,
+            'isDeleted' => $isDeleted
         ]);
         DB::update('verdant_page_node', ['verdant_page_node_version_id' => $versionGuid], $nodeId);
         return $versionGuid;
