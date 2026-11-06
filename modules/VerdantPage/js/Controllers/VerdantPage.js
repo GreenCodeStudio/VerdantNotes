@@ -131,6 +131,9 @@ export class show {
                     Ajax.VerdantPage.deleteNode(node.node_id);
                 }
             }
+            const sortGrabber = document.createElement('div');
+            sortGrabber.classList.add('sortGrabber');
+            nodeElement.prepend(sortGrabber);
         }
     }
 
