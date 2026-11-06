@@ -1,14 +1,17 @@
 <div class="verdantPageWrapper">
     <div class="ribbon">
         <section class="ribbon-tab">
-    <!--        <section>-->
-    <!--            <h3>Notes</h3>-->
-    <!--            <button class="add-notebook-button">Utwórz notes</button>-->
-    <!--        </section>-->
-    <!--        <section>-->
-    <!--            <h3>Strona</h3>-->
-    <!--            <button class="add-page-button">Utwórz stronę</button>-->
-    <!--        </section>-->
+            <:if condition=isAuthorized >
+            <section>
+                <h3>Notes</h3>
+                <button class="addNotebookButton">Utwórz notes</button>
+                <a href="/VerdantNotebook/my" class="myMotebooksButton">Moje notesy</a>
+            </section>
+            <section>
+                <h3>Strona</h3>
+                <button class="addPageButton">Utwórz stronę</button>
+            </section>
+            </:if>
             <section>
                 <h3>Edit</h3>
                 <:if condition=canEdit>
@@ -32,7 +35,7 @@
             </section>
         </section>
     </div>
-    <article data-can-edit=canEdit class="verdantPageArticle" data-id=page.id >
+    <article data-can-edit=canEdit class="verdantPageArticle" data-id=page.id data-notebook-id=page.notebook_id>
         <h1>{{page.title}}</h1>
         <:foreach collection=page.nodes item=node>
             << showNode(node) >>

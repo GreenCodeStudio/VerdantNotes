@@ -24,7 +24,7 @@ class VerdantPage
         return (new VerdantPageNodeRepository())->canEdit($nodeId);
     }
 
-    public function updateNode(?string $nodeId, ?string $previousVersionId, $type, $content, $pageId)
+    public function updateNode(?string $nodeId, ?string $previousVersionId, $type, $content, $pageId, $sortOrder)
     {
         $previousVersion = $previousVersionId ? (new VerdantPageNodeRepository())->getVersion($previousVersionId) : null;
         if ($previousVersion) {
@@ -34,6 +34,8 @@ class VerdantPage
             if ($previousVersion->type != $type) {
                 throw new \Exception("Node type mismatch");
             }
+            if (!$sortOrder)
+                $sortOrder = $previousVersion->sortOrder || time() << 16;
         } else {
             $node = (new VerdantPageNodeRepository())->get($nodeId);
             if ($node) {
@@ -47,7 +49,7 @@ class VerdantPage
                 (new VerdantPageNodeRepository())->insert($nodeId);
             }
         }
-        return (new VerdantPageNodeRepository())->insertVersion($nodeId, $previousVersionId, $type, $content, $pageId);
+        return (new VerdantPageNodeRepository())->insertVersion($nodeId, $previousVersionId, $type, $content, $pageId, $sortOrder);
     }
 
     public function getNewEmpty()
@@ -60,7 +62,8 @@ class VerdantPage
             'nodes' => [],
             'notebookPages' => [],
             'notebook_id' => null,
-            'notebook_name' => ''
+            'notebook_name' => '',
+            'sortOrder' => time() << 16
         ];
     }
 
@@ -76,9 +79,9 @@ class VerdantPage
             [
                 'id' => Guid::create(),
                 'page_id' => $pageId,
+                'notebook_id' => $notebookId,
                 'title' => '',
-                'public_permissions_read' => false,
-                'public_permissions_edit' => false
+                'sortOrder' => time() << 16
             ]
         );
 

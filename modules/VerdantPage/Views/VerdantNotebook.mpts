@@ -1,0 +1,38 @@
+<div class="verdantPageWrapper">
+    <div class="ribbon">
+        <section class="ribbon-tab">
+            <:if condition=isAuthorized >
+            <section>
+                <h3>Notes</h3>
+                <button class="addNotebookButton">Utwórz notes</button>
+                <a href="/VerdantNotebook/my" class="myMotebooksButton">Moje notesy</a>
+            </section>
+                <section>
+                    <h3>Strona</h3>
+                    <button class="addPageButton">Utwórz stronę</button>
+                </section>
+            </:if>
+            <section>
+                <h3>Help</h3>
+                <a href="/VerdantPage/show/f603d4af-11a9-4174-a824-4078520042cc" class="button">About</a>
+            </section>
+        </section>
+    </div>
+    <article class="noArticle"  data-notebook-id=notebook.id >
+
+    </article>
+    <aside>
+        <h1>
+            {{notebook.name}}
+        </h1>
+        <ul>
+            <:foreach collection=notebook.pages item=notebookPage>
+                <li>
+                    <a href="/VerdantPage/show/":notebookPage.id >
+                                          {{notebookPage.title}}
+                                   </a>
+                </li>
+            </:foreach>
+        </ul>
+    </aside>
+</div>

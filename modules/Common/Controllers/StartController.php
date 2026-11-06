@@ -58,10 +58,16 @@ class StartController extends PageStandardController
         } else {
             $page = (new VerdantPage())->getNewEmpty();
 
-            $this->addView('VerdantPage', 'VerdantPage', ['page' => $page, 'showNode' => fn($x) => null, 'canEdit' => true]);
+            $this->addView('VerdantPage', 'VerdantPage', [
+                'page' => $page,
+                'showNode' => fn($x) => null,
+                'canEdit' => true,
+                'isAuthorized' => \Authorization\Authorization::isLogged()
+            ]);
 
         }
     }
+
     public function index_data()
     {
         return ['isUserLoggedIn' => \Authorization\Authorization::isLogged()];

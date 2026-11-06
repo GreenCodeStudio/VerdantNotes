@@ -14,15 +14,22 @@ class VerdantNotebookRepository
 
     public function getByOwner($getUserId)
     {
-        return DB::get("SELECT verdant_notebook.*, 
-           (
-              SELECT verdant_page.id 
-              FROM verdant_page 
-              JOIN verdant_page_details ON verdant_page.details_id = verdant_page_details.id 
-              WHERE verdant_page_details.notebook_id = verdant_notebook.id 
-              LIMIT 1
-            ) as first_page_id
+        return DB::get("SELECT verdant_notebook.*
         FROM verdant_notebook
         WHERE owner_id = ?", [$getUserId]);
+    }
+
+    public function getToShow(string $id)
+    {
+        $item= DB::get("SELECT verdant_notebook.*
+        FROM verdant_notebook
+        WHERE id = ?", [$id])[0]??null;
+        if($item){
+            $item->pages = DB::get("SELECT verdant_page.id, verdant_page_details.title
+            FROM verdant_page
+            JOIN verdant_page_details ON verdant_page.details_id = verdant_page_details.id
+            WHERE notebook_id = ?", [$id]);
+        }
+        return $item;
     }
 }

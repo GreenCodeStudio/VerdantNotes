@@ -1,7 +1,7 @@
 <ul>
     <:foreach collection=notebooks item=notebook>
         <li>
-            <a href="/VerdantPage/show/":notebook.first_page_id >
+            <a href="/VerdantNotebook/show/":notebook.id >
                 {{notebook.name}}
             </a>
         </li>

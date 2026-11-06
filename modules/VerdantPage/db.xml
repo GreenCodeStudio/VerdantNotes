@@ -55,6 +55,11 @@
             <type>text</type>
             <null>yes</null>
         </column>
+        <column>
+            <name>sortOrder</name>
+            <type>bigint</type>
+            <null>NO</null>
+        </column>
         <index>
             <type>PRIMARY</type>
             <element>id</element>
@@ -80,6 +85,10 @@
             <reference name="verdant_page_details">
                 <element>id</element>
             </reference>
+        </index>
+        <index>
+            <type>INDEX</type>
+            <element>notebook_id</element>
         </index>
         <index>
             <type>FOREIGN</type>
@@ -147,6 +156,11 @@
         <column>
             <name>page_id</name>
             <type>char(36)</type>
+            <null>NO</null>
+        </column>
+        <column>
+            <name>sortOrder</name>
+            <type>bigint</type>
             <null>NO</null>
         </column>
         <index>

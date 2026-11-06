@@ -112,6 +112,10 @@ use Core\Formatter;
     //<![CDATA[
     window.controllerInitInfo = <?=json_encode($this->getInitInfo())?>;
     window.DEBUG = <?=json_encode($this->isDebug())?>;
+    window.serverTimeDiff =new Date() - <?=microtime(true) * 1000?>;
+    window.getServerDate = function() {
+        return new Date(new Date().getTime() - window.serverTimeDiff);
+    };
     //]]>
 </script>
 <script src="/dist/main.js" type="text/javascript"></script>

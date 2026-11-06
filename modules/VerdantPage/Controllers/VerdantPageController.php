@@ -16,7 +16,12 @@ class VerdantPageController extends PageStandardController
         if (!$page) throw new NotFoundException();
 
         $canEdit = $page->public_permissions_edit || $page->notebook_owner_id === \Authorization\Authorization::getUserId();
-        $this->addView('VerdantPage', 'VerdantPage', ['page' => $page, 'showNode' => fn($x) => $this->showNode($x, $canEdit), 'canEdit' => $canEdit]);
+        $this->addView('VerdantPage', 'VerdantPage', [
+            'page' => $page,
+            'showNode' => fn($x) => $this->showNode($x, $canEdit),
+            'canEdit' => $canEdit,
+            'isAuthorized' => \Authorization\Authorization::isLogged()
+        ]);
     }
 
     public function pdf(string $id)

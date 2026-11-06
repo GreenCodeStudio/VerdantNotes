@@ -1,15 +1,33 @@
 import {Ajax} from "../../../Core/js/ajax";
+import {pageManager} from "../../../Core/js/pageManager";
 
 export class show {
-    constructor(page, data) {
+    constructor(page, data, initInfo) {
         this.data = data;
         this.page = page;
+
         page.querySelector('.editBtn')?.addEventListener('click', () => {
             this.startEdit();
         });
         this.article = page.querySelector('article');
         this.pageId = this.article.dataset.id
 
+        this.page.querySelector('.addNotebookButton')?.addEventListener('click', async () => {
+            const name = prompt('Enter notebook name');
+            if (name !== null) {
+                const id = await Ajax.VerdantNotebook.insert({name});
+                pageManager.goto(`/VerdantNotebook/show/${id}`);
+            }
+        });
+        this.page.querySelector('.addPageButton')?.addEventListener('click', async () => {
+            const id = crypto.randomUUID();
+            await Ajax.VerdantPage.createNewPage(id, this.page.querySelector('article').dataset.notebookId);
+            pageManager.goto(`/VerdantPage/show/${id}?edit`);
+        });
+
+        if('edit' in data._query||sessionStorage.isEditEnabled=='1') {
+            this.startEdit();
+        }
     }
 
     startEdit() {
@@ -40,7 +58,7 @@ export class show {
                         text: newPlainTextNode.textContent
                     }
                 }
-                Ajax.VerdantPage.updateNode(node.node_id, null, node.type, node.content, this.pageId);
+                Ajax.VerdantPage.updateNode(node.node_id, null, node.type, node.content, this.pageId, (getServerDate()/1000)<<16);
                 const nodeElement = document.createElement('section');
                 nodeElement.dataset.node = JSON.stringify(node);
                 nodeElement.textContent = node.content.text;
@@ -54,12 +72,12 @@ export class show {
         this.page.querySelector('.editBtn').disabled = true;
         const titleElement = this.page.querySelector('article>h1')
         titleElement.contentEditable = true;
-        if(titleElement.textContent.trim().length == 0){
+        if (titleElement.textContent.trim().length == 0) {
             titleElement.classList.add('placeholder');
             titleElement.textContent = 'Click here to add a title';
         }
         titleElement.onfocus = () => {
-            if(titleElement.classList.contains('placeholder')){
+            if (titleElement.classList.contains('placeholder')) {
                 titleElement.classList.remove('placeholder');
                 titleElement.textContent = '';
             }
@@ -72,11 +90,12 @@ export class show {
                 }
                 Ajax.VerdantPage.updateTitle(this.pageId, titleElement.textContent);
             }
-            if(titleElement.textContent.trim().length == 0){
+            if (titleElement.textContent.trim().length == 0) {
                 titleElement.classList.add('placeholder');
                 titleElement.textContent = 'Click here to add a title';
             }
         }
+        sessionStorage.isEditEnabled = '1';
     }
 
     initNodeEdit(nodeElement) {

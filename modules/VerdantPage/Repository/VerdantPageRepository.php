@@ -19,7 +19,8 @@ class VerdantPageRepository
         $item->nodes = DB::get("SELECT *
         FROM verdant_page_node vpn
         JOIN verdant_page_node_version vpnv ON vpnv.id = vpn.verdant_page_node_version_id
-        WHERE vpnv.page_id = ?", [$id]);
+        WHERE vpnv.page_id = ?
+        ORDER BY vpnv.sortOrder", [$id]);
         $item->nodes = FunQuery::from($item->nodes)->map(function ($x) {
             $x->content = json_decode($x->content, false);
             return $x;
