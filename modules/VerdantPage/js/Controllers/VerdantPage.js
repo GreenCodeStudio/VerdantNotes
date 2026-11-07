@@ -1,5 +1,6 @@
 import {Ajax} from "../../../Core/js/ajax";
 import {pageManager} from "../../../Core/js/pageManager";
+import {ConfigurableWysiwygEditor} from "configurable-wysiwyg";
 
 export class show {
     constructor(page, data, initInfo) {
@@ -42,15 +43,15 @@ export class show {
         for (const nodeElement of this.article.querySelectorAll('[data-node]')) {
             this.initNodeEdit(nodeElement);
         }
-        const newPlainTextNode = document.createElement('section');
-        newPlainTextNode.classList.add('newPlainTextNode');
-        newPlainTextNode.contentEditable = true;
-        newPlainTextNode.textContent = 'Click here to add a new text'
-        newPlainTextNode.onfocus = () => {
-            newPlainTextNode.textContent = '';
+        const newTextNode = document.createElement('section');
+        newTextNode.classList.add('newTextNode');
+        newTextNode.contentEditable = true;
+        newTextNode.textContent = 'Click here to add a new text'
+        newTextNode.onfocus = () => {
+            newTextNode.textContent = '';
         }
-        newPlainTextNode.onblur = async () => {
-            if (newPlainTextNode.textContent.trim().length > 0) {
+        newTextNode.onblur = async () => {
+            if (newTextNode.textContent.trim().length > 0) {
                 let needRedirect = false;
                 if (!this.pageId) {
                     await this.createNewPage();
@@ -62,7 +63,7 @@ export class show {
                     verdant_page_node_version_id: null,
                     type: 'text/plain',
                     content: {
-                        text: newPlainTextNode.textContent
+                        text: newTextNode.textContent
                     }
                 }
                 const promise = Ajax.VerdantPage.updateNode(node.node_id, null, node.type, node.content, this.pageId, (getServerDate() / 1000) << 16);
@@ -74,12 +75,12 @@ export class show {
                     nodeElement.dataset.node = JSON.stringify(node);
                     nodeElement.textContent = node.content.text;
                     this.initNodeEdit(nodeElement);
-                    this.article.insertBefore(nodeElement, newPlainTextNode);
+                    this.article.insertBefore(nodeElement, newTextNode);
                 }
             }
-            newPlainTextNode.textContent = 'Click here to add a new text';
+            newTextNode.textContent = 'Click here to add a new text';
         }
-        this.article.append(newPlainTextNode);
+        this.article.append(newTextNode);
         this.page.querySelector('.editBtn').classList.add('active');
         this.page.querySelector('.editBtn').disabled = true;
         const titleElement = this.page.querySelector('article>h1')
@@ -106,7 +107,7 @@ export class show {
                     needRedirect = true;
                 }
                 const promise = Ajax.VerdantPage.updateTitle(this.pageId, titleElement.textContent);
-                if(needRedirect) {
+                if (needRedirect) {
                     await promise;
                     pageManager.goto(`/VerdantPage/show/${this.pageId}?edit`);
                 }
