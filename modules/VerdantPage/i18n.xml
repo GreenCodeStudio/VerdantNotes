@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<root>
+    <node name="ribbon">
+        <node name="notebook">
+            <value lang="en">Notebook</value>
+            <value lang="pl">Notes</value>
+            <node name="add">
+                <value lang="en">Create notebook</value>
+                <value lang="pl">Utwórz notes</value>
+            </node>
+            <node name="my">
+                <value lang="en">My notebooks</value>
+                <value lang="pl">Moje notesy</value>
+            </node>
+        </node>
+        <node name="page">
+            <value lang="en">Page</value>
+            <value lang="pl">Strona</value>
+            <node name="add">
+                <value lang="en">Create page</value>
+                <value lang="pl">Utwórz stronę</value>
+            </node>
+        </node>
+        <node name="export">
+            <value lang="en">Export</value>
+            <value lang="pl">Eksport</value>
+            <node name="rtf">
+                <value lang="en">Download RTF</value>
+                <value lang="pl">Pobierz RTF</value>
+            </node>
+            <node name="pdf">
+                <value lang="en">Download PDF</value>
+                <value lang="pl">Pobierz PDF</value>
+            </node>
+            <node name="word">
+                <value lang="en">Download Word</value>
+                <value lang="pl">Pobierz Word</value>
+            </node>
+        </node>
+        <node name="help">
+            <value lang="en">Help</value>
+            <value lang="pl">Pomoc</value>
+            <node name="about">
+                <value lang="en">About</value>
+                <value lang="pl">O programie</value>
+            </node>
+        </node>
+    </node>
+</root>

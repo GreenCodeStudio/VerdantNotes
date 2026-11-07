@@ -148,6 +148,17 @@ body {
         background: #eeeeee88;
         backdrop-filter: blur(8px);
         text-align: center;
+        color: #0008;
+        transition: color 200ms ease-in-out;
+
+        &:hover, &:focus-within {
+            color: #000c;
+        }
+
+        a{
+            text-decoration: none;
+            color: inherit;
+        }
 
         .languageSelect {
             ul {
