@@ -3,6 +3,7 @@
     margin: 0 auto;
     padding: 16px;
     width: 100%;
+    box-sizing: border-box;
 
     > h1 {
         min-height: 1.2em;
@@ -10,6 +11,12 @@
 
         &.placeholder {
             opacity: 0.5;
+        }
+        &[contenteditable="plaintext-only"] {
+            &:hover, &:focus, &:focus-within {
+                outline: 1px solid #ccc;
+                outline-offset: 8px;
+            }
         }
     }
 

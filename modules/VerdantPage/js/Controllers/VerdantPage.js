@@ -47,7 +47,7 @@ export class show {
         newTextNode.classList.add('newTextNode');
         newTextNode.placeholder = 'Click here to add a new text'
         newTextNode.onblur = async () => {
-            if (newTextNode.textContent.trim().length > 0) {
+            if (newTextNode.getXmlDom().documentElement.children.length > 0) {
                 let needRedirect = false;
                 if (!this.pageId) {
                     await this.createNewPage();
@@ -80,7 +80,7 @@ export class show {
         this.page.querySelector('.editBtn').classList.add('active');
         this.page.querySelector('.editBtn').disabled = true;
         const titleElement = this.page.querySelector('article>h1')
-        titleElement.contentEditable = true;
+        titleElement.contentEditable = 'plaintext-only';
         if (titleElement.textContent.trim().length == 0) {
             titleElement.classList.add('placeholder');
             titleElement.textContent = 'Click here to add a title';
@@ -168,7 +168,7 @@ export class show {
                     Ajax.VerdantPage.deleteNode(node.node_id);
                 }
             }
-            while(nodeElement.firstChild) {
+            while (nodeElement.firstChild) {
                 nodeElement.removeChild(nodeElement.firstChild);
             }
             const sortGrabber = document.createElement('div');
