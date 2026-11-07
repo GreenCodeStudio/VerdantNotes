@@ -11,9 +11,11 @@ use Core\Formatter;
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="/dist/main.css" rel="stylesheet" type="text/css">
     <meta name="theme-color" content="#cccccc">
+    <link rel="icon" href="/dist/Common/logoIcon.svg" type="image/svg+xml">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    <link rel="manifest" href="/dist/Common/manifest.json">
     <?php foreach ($this->getHeadLinks() ?? [] as $link) {
         echo '<link ';
         foreach ($link as $key => $value) {
@@ -26,7 +28,7 @@ use Core\Formatter;
 </head>
 <body>
 <header>
-    <h1><a href="/">Verdant Notes</a></h1>
+    <h1><a href="/"><img src="/dist/Common/logo.svg" alt="Verdant Notes"></a></h1>
     <?php
     if (empty($userData)) {
         ?>

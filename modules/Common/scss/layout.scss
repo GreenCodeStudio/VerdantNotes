@@ -3,7 +3,7 @@ html {
     margin: 0;
     padding: 0;
     font-family: Figtree;
-    background: red;
+    background: #f6f6f6;
 }
 
 body {
@@ -27,6 +27,10 @@ body {
             a{
                 text-decoration: none;
                 color: inherit;
+                img{
+                    width: 215px;
+                    height: 30px;
+                }
             }
         }
 
