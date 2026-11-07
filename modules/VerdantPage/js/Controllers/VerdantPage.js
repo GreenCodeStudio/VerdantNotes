@@ -43,13 +43,9 @@ export class show {
         for (const nodeElement of this.article.querySelectorAll('[data-node]')) {
             this.initNodeEdit(nodeElement);
         }
-        const newTextNode = document.createElement('section');
+        const newTextNode = new ConfigurableWysiwygEditor();
         newTextNode.classList.add('newTextNode');
-        newTextNode.contentEditable = true;
-        newTextNode.textContent = 'Click here to add a new text'
-        newTextNode.onfocus = () => {
-            newTextNode.textContent = '';
-        }
+        newTextNode.placeholder = 'Click here to add a new text'
         newTextNode.onblur = async () => {
             if (newTextNode.textContent.trim().length > 0) {
                 let needRedirect = false;
@@ -61,9 +57,9 @@ export class show {
                 const node = {
                     node_id: crypto.randomUUID(),
                     verdant_page_node_version_id: null,
-                    type: 'text/plain',
+                    type: 'text/xml+configurable-wysiwyg',
                     content: {
-                        text: newTextNode.textContent
+                        xml: newTextNode.getXml()
                     }
                 }
                 const promise = Ajax.VerdantPage.updateNode(node.node_id, null, node.type, node.content, this.pageId, (getServerDate() / 1000) << 16);
@@ -78,7 +74,7 @@ export class show {
                     this.article.insertBefore(nodeElement, newTextNode);
                 }
             }
-            newTextNode.textContent = 'Click here to add a new text';
+            newTextNode.clear();
         }
         this.article.append(newTextNode);
         this.page.querySelector('.editBtn').classList.add('active');
@@ -99,7 +95,6 @@ export class show {
             document.querySelectorAll('aside .asidePageLink[data-id="' + this.pageId + '"]')?.forEach(el => el.textContent = titleElement.textContent || 'Strona bez nazwy');
         }
         titleElement.onblur = async () => {
-
             if (titleElement.textContent.trim().length > 0 && titleElement.textContent != this.data.title) {
                 let needRedirect = false;
                 if (!this.pageId) {
@@ -156,6 +151,31 @@ export class show {
             const sortGrabber = document.createElement('div');
             sortGrabber.classList.add('sortGrabber');
             nodeElement.prepend(sortGrabber);
+        } else if (node.type == 'text/xml+configurable-wysiwyg') {
+            const editor = new ConfigurableWysiwygEditor();
+
+            editor.onblur = () => {
+                console.log({node})
+                if (node.content.xml != editor.getXml()) {
+                    node.content.xml = editor.getXml();
+                    Ajax.VerdantPage.updateNode(node.node_id, node.verdant_page_node_version_id, node.type, node.content, this.pageId);
+                }
+            }
+            editor.onkeydown = e => {
+                if ((e.key == 'Backspace' || e.key == 'Delete') && editor.textContent.length == 0) {
+                    e.preventDefault();
+                    nodeElement.remove();
+                    Ajax.VerdantPage.deleteNode(node.node_id);
+                }
+            }
+            while(nodeElement.firstChild) {
+                nodeElement.removeChild(nodeElement.firstChild);
+            }
+            const sortGrabber = document.createElement('div');
+            sortGrabber.classList.add('sortGrabber');
+            nodeElement.append(sortGrabber);
+            nodeElement.append(editor);
+            editor.loadXml(node.content.xml);
         }
     }
 

@@ -21,7 +21,7 @@ class VerdantPageController extends PageStandardController
             'showNode' => fn($x) => $this->showNode($x, $canEdit),
             'canEdit' => $canEdit,
             'isAuthorized' => \Authorization\Authorization::isLogged(),
-                'noName'=> fn($x, $default) => $x ?: $default
+            'noName' => fn($x, $default) => $x ?: $default
         ]);
     }
 
@@ -100,6 +100,11 @@ startxref
                 return '<section data-node="'.htmlspecialchars(json_encode($node)).'">'.htmlspecialchars($node->content->text).'</section>';
             }
             return '<section>'.htmlspecialchars($node->content->text).'</section>';
+        } else if ($node->type === 'text/xml+configurable-wysiwyg') {
+            if ($canEdit) {
+                return '<section data-node="'.htmlspecialchars(json_encode($node)).'">'.htmlspecialchars($node->content?->xml).'</section>';
+            }
+            return '<section>'.htmlspecialchars($node->content->xml).'</section>';
         }
     }
 

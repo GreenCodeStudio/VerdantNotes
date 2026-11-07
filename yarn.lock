@@ -615,10 +615,10 @@ commander@^2.20.0:
   resolved "https://registry.yarnpkg.com/commander/-/commander-2.20.3.tgz#fd485e84c03eb4881c20722ba48035e8531aeb33"
   integrity sha512-GpVkmM8vF2vQUkj2LvZmD35JxeJOLCwJ9cUkugyk2nuhbv3+mJvpLYYt+0+USMxE+oj+ey/lJEnhZw75x/OMcQ==
 
-configurable-wysiwyg@^0.0.2:
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/configurable-wysiwyg/-/configurable-wysiwyg-0.0.2.tgz#5ade4f0c018cd30c659eb7c2bde88baf3ff8798e"
-  integrity sha512-uK7V4/XoaIUE2YDzyCcXv+uxNlhg1coIcgCCCaPZb+ecz1Acr8XyMG0GYVuZvxFmCNqcuAjEwIngZPZPHHN49g==
+configurable-wysiwyg@^0.0.4:
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/configurable-wysiwyg/-/configurable-wysiwyg-0.0.4.tgz#9dd28604d0d85ed8c210680a78d016667899455d"
+  integrity sha512-mzIK6eGuHdphbnDqcQMrqcRmvkH26r6t25BzE7QYCFFXUiiKo1g6/aLtn2HobSrTpFMaysA6Vo05RNi324MH9g==
   dependencies:
     "@green-code-studio/context-menu" "^1.0.2"
     "@green-code-studio/internationalization" "^1.0.4"

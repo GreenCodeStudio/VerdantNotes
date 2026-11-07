@@ -54,7 +54,7 @@ class VerdantPage
     public function deleteNode(string $nodeId)
     {
         $node = (new VerdantPageNodeRepository())->get($nodeId);
-        return (new VerdantPageNodeRepository())->insertVersion($nodeId, $node->previousVersionId, $node->type, $node->content, $node->pageId, $node->sortOrder, true);
+        return (new VerdantPageNodeRepository())->insertVersion($nodeId, $node->previousVersionId, $node->type, null, $node->page_id, $node->sortOrder, true);
 
     }
 

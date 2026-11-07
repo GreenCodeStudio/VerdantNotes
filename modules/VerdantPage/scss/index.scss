@@ -13,9 +13,10 @@
         }
     }
 
-    section {
+    section, configurable-wysiwyg-editor {
         margin: 16px 0;
         position: relative;
+        display: block;
 
         &[contenteditable="true"] {
             &:hover, &:focus, &:focus-within {
@@ -24,7 +25,7 @@
             }
         }
 
-        &.newPlainTextNode {
+        &.newTextNode {
             opacity: 0.5;
 
             &:focus, &:focus-within {

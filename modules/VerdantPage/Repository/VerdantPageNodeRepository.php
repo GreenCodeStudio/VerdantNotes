@@ -19,14 +19,14 @@ class VerdantPageNodeRepository
         WHERE vpn.id = ?", [$userId, $nodeId])[0]->a ?? false;
     }
 
-    public function insertVersion(string $nodeId, $previousVersion, $type, $content, $pageId, $sortOrder, bool $isDeleted = false)
+    public function insertVersion(string $nodeId, ?string $previousVersionId, $type, $content, $pageId, $sortOrder, bool $isDeleted = false)
     {
         $versionGuid = Guid::create();
         DB::insert('verdant_page_node_version', [
             'id' => $versionGuid,
             'node_id' => $nodeId,
             'content' => json_encode($content),
-            'previous_version_id' => $previousVersion?->id,
+            'previous_version_id' => $previousVersionId,
             'type' => $type,
             'page_id' => $pageId,
             'sortOrder' => $sortOrder,
