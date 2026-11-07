@@ -62,7 +62,8 @@ class StartController extends PageStandardController
                 'page' => $page,
                 'showNode' => fn($x) => null,
                 'canEdit' => true,
-                'isAuthorized' => \Authorization\Authorization::isLogged()
+                'isAuthorized' => \Authorization\Authorization::isLogged(),
+                'noName'=> fn($x, $default) => $x ?: $default
             ]);
 
         }

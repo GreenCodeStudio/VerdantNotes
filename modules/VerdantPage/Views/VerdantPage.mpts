@@ -53,13 +53,13 @@
     </article>
     <aside>
         <h1>
-            {{page.notebook_name}}
+            {{noName(page.notebook_name , 'Notes bez nazwy')}}
         </h1>
         <ul>
             <:foreach collection=page.notebookPages item=notebookPage>
                 <li>
-                    <a href="/VerdantPage/show/":notebookPage.id >
-                                          {{notebookPage.title}}
+                    <a href="/VerdantPage/show/":notebookPage.id  class="asidePageLink" data-id=notebookPage.id >
+                                          {{noName(notebookPage.title , 'Strona bez nazwy')}}
                                    </a>
                 </li>
             </:foreach>

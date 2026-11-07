@@ -31,6 +31,11 @@ export class show {
     }
 
     startEdit() {
+        if (this.editStarted) {
+            return;
+        }
+        this.editStarted = true;
+        console.log('startEdit');
         if (this.article.dataset.canEdit == '1') {
 
         }
@@ -46,8 +51,10 @@ export class show {
         }
         newPlainTextNode.onblur = async () => {
             if (newPlainTextNode.textContent.trim().length > 0) {
+                let needRedirect = false;
                 if (!this.pageId) {
                     await this.createNewPage();
+                    needRedirect = true;
                 }
 
                 const node = {
@@ -58,12 +65,17 @@ export class show {
                         text: newPlainTextNode.textContent
                     }
                 }
-                Ajax.VerdantPage.updateNode(node.node_id, null, node.type, node.content, this.pageId, (getServerDate() / 1000) << 16);
-                const nodeElement = document.createElement('section');
-                nodeElement.dataset.node = JSON.stringify(node);
-                nodeElement.textContent = node.content.text;
-                this.initNodeEdit(nodeElement);
-                this.article.insertBefore(nodeElement, newPlainTextNode);
+                const promise = Ajax.VerdantPage.updateNode(node.node_id, null, node.type, node.content, this.pageId, (getServerDate() / 1000) << 16);
+                if (needRedirect) {
+                    await promise;
+                    pageManager.goto(`/VerdantPage/show/${this.pageId}?edit`);
+                } else {
+                    const nodeElement = document.createElement('section');
+                    nodeElement.dataset.node = JSON.stringify(node);
+                    nodeElement.textContent = node.content.text;
+                    this.initNodeEdit(nodeElement);
+                    this.article.insertBefore(nodeElement, newPlainTextNode);
+                }
             }
             newPlainTextNode.textContent = 'Click here to add a new text';
         }
@@ -82,13 +94,22 @@ export class show {
                 titleElement.textContent = '';
             }
         }
+        titleElement.oninput = () => {
+            document.querySelectorAll('aside .asidePageLink[data-id="' + this.pageId + '"]')?.forEach(el => el.textContent = titleElement.textContent || 'Strona bez nazwy');
+        }
         titleElement.onblur = async () => {
 
             if (titleElement.textContent.trim().length > 0 && titleElement.textContent != this.data.title) {
+                let needRedirect = false;
                 if (!this.pageId) {
                     await this.createNewPage();
+                    needRedirect = true;
                 }
-                Ajax.VerdantPage.updateTitle(this.pageId, titleElement.textContent);
+                const promise = Ajax.VerdantPage.updateTitle(this.pageId, titleElement.textContent);
+                if(needRedirect) {
+                    await promise;
+                    pageManager.goto(`/VerdantPage/show/${this.pageId}?edit`);
+                }
             }
             if (titleElement.textContent.trim().length == 0) {
                 titleElement.classList.add('placeholder');

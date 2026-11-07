@@ -20,7 +20,8 @@ class VerdantPageController extends PageStandardController
             'page' => $page,
             'showNode' => fn($x) => $this->showNode($x, $canEdit),
             'canEdit' => $canEdit,
-            'isAuthorized' => \Authorization\Authorization::isLogged()
+            'isAuthorized' => \Authorization\Authorization::isLogged(),
+                'noName'=> fn($x, $default) => $x ?: $default
         ]);
     }
 

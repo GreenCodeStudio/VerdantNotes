@@ -2,7 +2,7 @@
     <:foreach collection=notebooks item=notebook>
         <li>
             <a href="/VerdantNotebook/show/":notebook.id >
-                {{notebook.name}}
+                {{noName(notebook.name , 'Notes bez nazwy')}}
             </a>
         </li>
     </:foreach>
