@@ -7,8 +7,8 @@
     "display": "standalone",
     "display_override": ["fullscreen", "minimal-ui"],
     "orientation": "any",
-    "background_color": "#f6f6f6",
-    "theme_color": "#43ad21",
+    "background_color": "#d8e9cd",
+    "theme_color": "#5aab30",
     "icons": [
         {
             "src": "/dist/Common/logoIcon.svg",

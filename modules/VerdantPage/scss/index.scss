@@ -16,6 +16,7 @@
         &.placeholder {
             opacity: 0.5;
         }
+
         &[contenteditable="plaintext-only"] {
             &:hover, &:focus, &:focus-within {
                 outline: 1px solid #ccc;
@@ -85,7 +86,6 @@
 }
 
 .ribbon {
-
     .ribbon-tab {
         background: var(--background);
         padding: 8px;
@@ -111,6 +111,11 @@
                 display: grid;
                 flex-grow: 1;
                 gap: 4px;
+                grid-template-columns: 100%;
+                width: 100%;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                overflow: hidden;
             }
 
             h3 {
@@ -149,6 +154,14 @@
 
                         button, .button {
                             flex-direction: column;
+
+                            &::before {
+                                flex-grow: 1;
+                                align-items: center;
+                                justify-items: center;
+                                display: flex;
+                                font-size: 40px;
+                            }
                         }
                     }
                 }
@@ -159,8 +172,17 @@
                 @container (min-width: 320px) {
                     > div {
                         grid-template-columns: 1fr 1fr 1fr;
+
                         button, .button {
                             flex-direction: column;
+
+                            &::before {
+                                flex-grow: 1;
+                                align-items: center;
+                                justify-items: center;
+                                display: flex;
+                                font-size: 40px;
+                            }
                         }
                     }
                 }
@@ -171,14 +193,22 @@
             @include button;
             display: flex;
             align-items: center;
-            justify-items: center;
-            justify-content: center;
+            justify-content: start;
             text-align: center;
             flex-direction: row;
 
             &:not(&:hover, &:focus, &:active) {
                 background: transparent;
                 border-color: transparent;
+            }
+
+            &::before {
+                font-size: 20px;
+            }
+            >span{
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
             }
         }
     }
@@ -249,12 +279,13 @@
         grid-template-columns: 32px 1fr;
         > aside {
             margin-right: calc(-100vw + 80px);
-            transform: translateX(calc(-100%  + 16px));
+            transform: translateX(calc(-100% + 16px));
             transition: ease-in-out transform 0.2s;
             z-index: 1;
             background: #fff;
             box-shadow: var(--standardShadow);
             border-radius: 16px;
+
             &:hover, &:focus-within {
                 transform: translateX(0);
             }

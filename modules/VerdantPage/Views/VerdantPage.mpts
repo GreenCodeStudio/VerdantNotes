@@ -10,13 +10,13 @@
                     {{t('VerdantPage.ribbon.notebook.add')}}
                     </span>
                 </button>
-                <a href="/VerdantNotebook/my" class="myMotebooksButton button icon-my-notebooks">{{t('VerdantPage.ribbon.notebook.my')}}</a>
+                <a href="/VerdantNotebook/my" class="myMotebooksButton button icon-my-notebooks"><span>{{t('VerdantPage.ribbon.notebook.my')}}</span></a>
                </div>
             </section>
             <section>
                 <h3>{{t('VerdantPage.ribbon.page')}}</h3>
                 <div>
-                <button class="addPageButton icon-add-page">{{t('VerdantPage.ribbon.page.add')}}</button>
+                <button class="addPageButton icon-add-page"><span>{{t('VerdantPage.ribbon.page.add')}}</span></button>
 
                     <:if condition=page.id >
 
@@ -31,9 +31,9 @@
                 <section>
                     <h3>{{t('VerdantPage.ribbon.export')}}</h3>
                     <div>
-                    <a href="/VerdantPage/rtf/":page.id class="nativeLink button icon-download">{{t('VerdantPage.ribbon.export.rtf')}}</a>
-                    <a href="/VerdantPage/pdf/":page.id class="nativeLink button icon-download">{{t('VerdantPage.ribbon.export.pdf')}}</a>
-                    <a href="/VerdantPage/docx/":page.id class="nativeLink button icon-download">{{t('VerdantPage.ribbon.export.word')}}</a>
+                    <a href="/VerdantPage/rtf/":page.id class="nativeLink button icon-download"><span>{{t('VerdantPage.ribbon.export.rtf')}}</span></a>
+                    <a href="/VerdantPage/pdf/":page.id class="nativeLink button icon-download"><span>{{t('VerdantPage.ribbon.export.pdf')}}</span></a>
+                    <a href="/VerdantPage/docx/":page.id class="nativeLink button icon-download"><span>{{t('VerdantPage.ribbon.export.word')}}</span></a>
                     </div>
                 </section>
             </:if>
