@@ -14,6 +14,10 @@ html {
     //    --background: #222;
     //    --textColor: #fff;
     //}
+
+    @media print{
+        --pageBackground: #fff;
+    }
 }
 
 body {
@@ -100,6 +104,9 @@ body {
                 }
             }
         }
+        @media print{
+            display: none;
+        }
     }
 
     > main {
@@ -184,6 +191,9 @@ body {
                     display: block;
                 }
             }
+        }
+        @media print {
+            display: none;
         }
     }
 }
