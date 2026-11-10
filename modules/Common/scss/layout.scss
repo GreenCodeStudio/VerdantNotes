@@ -3,7 +3,17 @@ html {
     margin: 0;
     padding: 0;
     font-family: Figtree;
-    background: #f6f6f6;
+    background: var(--pageBackground);
+    --primaryColor:#5aab30;
+    --background:#fff;
+    --pageBackground: color-mix(in srgb, var(--primaryColor), var(--background) 75%);
+    --standardShadow: 0 4px 8px #0002;
+    --textColor:#000;
+    color: var(--textColor);
+    //@media (prefers-color-scheme: dark){
+    //    --background: #222;
+    //    --textColor: #fff;
+    //}
 }
 
 body {
@@ -12,10 +22,10 @@ body {
     min-height: 100vh;
     margin: 0;
     padding: 0;
-    background: #fff;
+    gap: 16px;
 
     > header {
-        background: #ccc8;
+        background: var(--pageBackground);
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -24,10 +34,12 @@ body {
             margin: 0;
             font-size: 20px;
             padding: 8px;
-            a{
+
+            a {
                 text-decoration: none;
                 color: inherit;
-                img{
+
+                img {
                     width: 215px;
                     height: 30px;
                 }
@@ -48,7 +60,7 @@ body {
             .loginInfo-expandable {
                 display: none;
                 position: absolute;
-                background: #fff8;
+                background: var(--background);
                 flex-direction: column;
                 backdrop-filter: blur(8px);
                 width: 100vw;
@@ -145,7 +157,7 @@ body {
     }
 
     > footer {
-        background: #eeeeee88;
+        background: var(--pageBackground);
         backdrop-filter: blur(8px);
         text-align: center;
         color: #0008;
@@ -155,7 +167,7 @@ body {
             color: #000c;
         }
 
-        a{
+        a {
             text-decoration: none;
             color: inherit;
         }

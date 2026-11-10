@@ -5,19 +5,23 @@
             <section class="ribbon-notebook">
                 <h3>{{t('VerdantPage.ribbon.notebook')}}</h3>
                <div>
-                <button class="addNotebookButton ">{{t('VerdantPage.ribbon.notebook.add')}}</button>
-                <a href="/VerdantNotebook/my" class="myMotebooksButton button">{{t('VerdantPage.ribbon.notebook.my')}}</a>
+                <button class="addNotebookButton icon-add-notebook">
+                    <span>
+                    {{t('VerdantPage.ribbon.notebook.add')}}
+                    </span>
+                </button>
+                <a href="/VerdantNotebook/my" class="myMotebooksButton button icon-my-notebooks">{{t('VerdantPage.ribbon.notebook.my')}}</a>
                </div>
             </section>
             <section>
                 <h3>{{t('VerdantPage.ribbon.page')}}</h3>
                 <div>
-                <button class="addPageButton">{{t('VerdantPage.ribbon.page.add')}}</button>
+                <button class="addPageButton icon-add-page">{{t('VerdantPage.ribbon.page.add')}}</button>
 
                     <:if condition=page.id >
 
                     <:if condition=canEdit>
-                        <button class="editBtn">Edit</button>
+                        <button class="editBtn icon-edit"><span>{{t('VerdantPage.ribbon.page.edit')}}</span></button>
                     </:if>
                     </:if>
                 </div>
@@ -27,9 +31,9 @@
                 <section>
                     <h3>{{t('VerdantPage.ribbon.export')}}</h3>
                     <div>
-                    <a href="/VerdantPage/rtf/":page.id class="nativeLink button">{{t('VerdantPage.ribbon.export.rtf')}}</a>
-                    <a href="/VerdantPage/pdf/":page.id class="nativeLink button">{{t('VerdantPage.ribbon.export.pdf')}}</a>
-                    <a href="/VerdantPage/docx/":page.id class="nativeLink button">{{t('VerdantPage.ribbon.export.word')}}</a>
+                    <a href="/VerdantPage/rtf/":page.id class="nativeLink button icon-download">{{t('VerdantPage.ribbon.export.rtf')}}</a>
+                    <a href="/VerdantPage/pdf/":page.id class="nativeLink button icon-download">{{t('VerdantPage.ribbon.export.pdf')}}</a>
+                    <a href="/VerdantPage/docx/":page.id class="nativeLink button icon-download">{{t('VerdantPage.ribbon.export.word')}}</a>
                     </div>
                 </section>
             </:if>

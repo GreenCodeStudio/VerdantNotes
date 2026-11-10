@@ -1,19 +1,22 @@
 @mixin button {
-    border: #8888 solid 1px;
+    border: #0000 solid 1px;
     border-radius: 4px;
     padding: 4px 8px;
-    background: #fff8;
+    background: transparent;
     backdrop-filter: blur(8px);
     cursor: pointer;
     user-select: none;
     color: inherit;
     font: inherit;
     text-decoration: none;
+    transition: 200ms ease-in-out background-color;
 
     &:hover, &:focus {
-        background: #0002;
+        background: color-mix(in srgb, var(--primaryColor), transparent 90%);
+        border: color-mix(in srgb, var(--primaryColor), transparent 50%) solid 1px;
     }
     &.active, &:active {
-        background: #0004;
+        background: color-mix(in srgb, var(--primaryColor), transparent 80%);
+        border: var(--primaryColor) solid 1px;
     }
 }

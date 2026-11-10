@@ -1,0 +1,50 @@
+{
+  "name": "",
+  "css_prefix_text": "icon-",
+  "css_use_suffix": false,
+  "hinting": true,
+  "units_per_em": 1000,
+  "ascent": 850,
+  "glyphs": [
+    {
+      "uid": "e800-add-notebook",
+      "css": "add-notebook",
+      "svg": {
+        "path": "M120 80 H640 V920 H120 Z M180 80 H240 V920 H180 Z M320 300 H560 V360 H320 Z M320 460 H520 V520 H320 Z M320 620 H560 V680 H320 Z M700 620 H820 V740 H940 V860 H820 V980 H700 V860 H580 V740 H700 Z",
+        "width": 1000
+      }
+    },
+    {
+      "uid": "e801-my-notebooks",
+      "css": "my-notebooks",
+      "svg": {
+        "path": "M180 140 H620 V820 H180 Z M240 140 H290 V820 H240 Z M380 320 H560 V370 H380 Z M380 450 H540 V500 H380 Z M380 580 H560 V630 H380 Z M320 80 H760 V760 H320 Z M380 80 H430 V760 H380 Z M520 260 H700 V310 H520 Z M520 390 H680 V440 H520 Z M520 520 H700 V570 H520 Z",
+        "width": 1000
+      }
+    },
+    {
+      "uid": "e802-add-page",
+      "css": "add-page",
+      "svg": {
+        "path": "M200 80 H620 L780 240 V920 H200 Z M620 80 V240 H780 Z M320 320 H640 V380 H320 Z M320 460 H640 V520 H320 Z M320 600 H520 V660 H320 Z M680 600 H760 V680 H840 V760 H760 V840 H680 V760 H600 V680 H680 Z",
+        "width": 1000
+      }
+    },
+    {
+      "uid": "e803-edit",
+      "css": "edit",
+      "svg": {
+        "path": "M140 760 L180 560 L620 120 L760 260 L320 700 Z M620 120 L700 40 L840 180 L760 260 Z M140 760 L300 720 L180 840 Z",
+        "width": 1000
+      }
+    },
+    {
+      "uid": "e804-download",
+      "css": "download",
+      "svg": {
+        "path": "M440 80 H560 V520 H700 L500 760 L300 520 H440 Z M180 780 H820 V920 H180 Z M240 680 H320 V780 H240 Z M680 680 H760 V780 H680 Z",
+        "width": 1000
+      }
+    }
+  ]
+}

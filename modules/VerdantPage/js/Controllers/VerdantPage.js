@@ -1,6 +1,7 @@
 import {Ajax} from "../../../Core/js/ajax";
 import {pageManager} from "../../../Core/js/pageManager";
-import {ConfigurableWysiwygEditor} from "configurable-wysiwyg";
+import {ConfigurableWysiwygEditor, LineBreak, Paragraph} from "configurable-wysiwyg";
+import {t} from "../../i18n.xml";
 
 export class show {
     constructor(page, data, initInfo) {
@@ -14,7 +15,7 @@ export class show {
         this.pageId = this.article.dataset.id
 
         this.page.querySelector('.addNotebookButton')?.addEventListener('click', async () => {
-            const name = prompt('Enter notebook name');
+            const name = prompt(t('ribbon.notebook.add.enterName'));
             if (name !== null) {
                 const id = await Ajax.VerdantNotebook.insert({name});
                 pageManager.goto(`/VerdantNotebook/show/${id}`);
@@ -45,7 +46,7 @@ export class show {
         }
         const newTextNode = new ConfigurableWysiwygEditor();
         newTextNode.classList.add('newTextNode');
-        newTextNode.placeholder = 'Click here to add a new text'
+        newTextNode.placeholder = t('page.clickToAddText');
         newTextNode.onblur = async () => {
             if (newTextNode.getXmlDom().documentElement.children.length > 0) {
                 let needRedirect = false;
@@ -77,13 +78,17 @@ export class show {
             newTextNode.clear();
         }
         this.article.append(newTextNode);
-        this.page.querySelector('.editBtn').classList.add('active');
-        this.page.querySelector('.editBtn').disabled = true;
+        const editBtn= this.page.querySelector('.editBtn');
+        if(editBtn) {
+            editBtn.classList.add('active');
+            editBtn.disabled = true;
+        }
         const titleElement = this.page.querySelector('article>h1')
+        console.log('titleElement', titleElement)
         titleElement.contentEditable = 'plaintext-only';
         if (titleElement.textContent.trim().length == 0) {
             titleElement.classList.add('placeholder');
-            titleElement.textContent = 'Click here to add a title';
+            titleElement.textContent = t('page.clickToAddTitle');
         }
         titleElement.onfocus = () => {
             if (titleElement.classList.contains('placeholder')) {
@@ -92,7 +97,7 @@ export class show {
             }
         }
         titleElement.oninput = () => {
-            document.querySelectorAll('aside .asidePageLink[data-id="' + this.pageId + '"]')?.forEach(el => el.textContent = titleElement.textContent || 'Strona bez nazwy');
+            document.querySelectorAll('aside .asidePageLink[data-id="' + this.pageId + '"]')?.forEach(el => el.textContent = titleElement.textContent || t('page.untitled'));
         }
         titleElement.onblur = async () => {
             if (titleElement.textContent.trim().length > 0 && titleElement.textContent != this.data.title) {
@@ -109,7 +114,7 @@ export class show {
             }
             if (titleElement.textContent.trim().length == 0) {
                 titleElement.classList.add('placeholder');
-                titleElement.textContent = 'Click here to add a title';
+                titleElement.textContent = t('page.clickToAddTitle');
             }
         }
         sessionStorage.isEditEnabled = '1';
@@ -153,6 +158,8 @@ export class show {
             nodeElement.prepend(sortGrabber);
         } else if (node.type == 'text/xml+configurable-wysiwyg') {
             const editor = new ConfigurableWysiwygEditor();
+            editor.addAllowedElement(new Paragraph());
+            editor.addAllowedElement(new LineBreak());
 
             editor.onblur = () => {
                 console.log({node})

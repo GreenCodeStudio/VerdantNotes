@@ -7,6 +7,10 @@
             <node name="add">
                 <value lang="en">Create notebook</value>
                 <value lang="pl">Utwórz notes</value>
+                <node name="enterName">
+                    <value lang="en">Enter notebook name</value>
+                    <value lang="pl">Podaj nazwę nowego notesu</value>
+                </node>
             </node>
             <node name="my">
                 <value lang="en">My notebooks</value>
@@ -19,6 +23,10 @@
             <node name="add">
                 <value lang="en">Create page</value>
                 <value lang="pl">Utwórz stronę</value>
+            </node>
+            <node name="edit">
+                <value lang="en">Edit page</value>
+                <value lang="pl">Edytuj stronę</value>
             </node>
         </node>
         <node name="export">
@@ -44,6 +52,20 @@
                 <value lang="en">About</value>
                 <value lang="pl">O programie</value>
             </node>
+        </node>
+    </node>
+    <node name="page">
+        <node name="clickToAddText">
+            <value lang="en">Click here to add a new text</value>
+            <value lang="pl">Kliknij tutaj, aby dodać nowy tekst</value>
+        </node>
+        <node name="clickToAddTitle">
+            <value lang="en">Click here to add a title</value>
+            <value lang="pl">Kliknij tutaj, aby dodać tytuł</value>
+        </node>
+        <node name="untitled">
+            <value lang="en">Untitled page</value>
+            <value lang="pl">Strona bez nazwy</value>
         </node>
     </node>
 </root>
