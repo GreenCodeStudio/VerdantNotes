@@ -9,7 +9,7 @@ use Core\Formatter;
     <title><?= htmlspecialchars($this->getTitle()) ?></title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="/dist/main.css" rel="stylesheet" type="text/css">
+    <link href="/dist/main.css?v=<?=htmlspecialchars($_ENV['VERSION']??'-')?>" rel="stylesheet" type="text/css">
     <meta name="theme-color" content="#cccccc">
     <link rel="icon" href="/dist/Common/logoIcon.svg" type="image/svg+xml">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -120,6 +120,6 @@ use Core\Formatter;
     };
     //]]>
 </script>
-<script src="/dist/main.js" type="text/javascript"></script>
+<script src="/dist/main.js?v=<?=htmlspecialchars($_ENV['VERSION']??'-')?>" type="text/javascript"></script>
 </body>
 </html>
