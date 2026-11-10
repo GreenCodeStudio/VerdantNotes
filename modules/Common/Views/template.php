@@ -10,7 +10,8 @@ use Core\Formatter;
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="/dist/main.css?v=<?=htmlspecialchars($_ENV['VERSION']??'-')?>" rel="stylesheet" type="text/css">
-    <meta name="theme-color" content="#cccccc">
+    <meta name="theme-color" content="#5aab30">
+    <meta name="color-scheme" content="light" />
     <link rel="icon" href="/dist/Common/logoIcon.svg" type="image/svg+xml">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
