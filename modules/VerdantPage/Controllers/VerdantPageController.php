@@ -20,7 +20,7 @@ class VerdantPageController extends PageStandardController
         $page = (new VerdantPage())->getToShow($id);
         if (!$page) throw new NotFoundException();
 
-        $canEdit = $page->public_permissions_edit || $page->notebook_owner_id === \Authorization\Authorization::getUserId();
+        $canEdit = $page->public_permissions_edit || (\Authorization\Authorization::isLogged() && $page->notebook_owner_id === \Authorization\Authorization::getUserId());
         $this->addView('VerdantPage', 'VerdantPage', [
             'page' => $page,
             'showNode' => fn($x) => $this->showNode($x, $canEdit),
@@ -121,12 +121,12 @@ startxref
             }
             return '<section>'.htmlspecialchars($node->content->text).'</section>';
         } else if ($node->type === 'text/xml+configurable-wysiwyg') {
+            $document = \Mkrawczyk\ConfigurableWysiwyg\Document::loadXmlString($node->content?->xml);
+            $document->config = ConfigurableWysiwygHelper::getConfig();
             if ($canEdit) {
-                $document = \Mkrawczyk\ConfigurableWysiwyg\Document::loadXmlString($node->content?->xml);
-                $document->config = ConfigurableWysiwygHelper::getConfig();
                 return '<section data-node="'.htmlspecialchars(json_encode($node)).'">'.(new ToHtmlConverter())->convert($document).'</section>';
             }
-            return '<section>'.htmlspecialchars($node->content->xml).'</section>';
+            return '<section>'.(new ToHtmlConverter())->convert($document).'</section>';
         }
     }
 
