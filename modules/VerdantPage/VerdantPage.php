@@ -27,6 +27,7 @@ class VerdantPage
     public function updateNode(?string $nodeId, ?string $previousVersionId, $type, $content, $pageId, $sortOrder)
     {
         $previousVersion = $previousVersionId ? (new VerdantPageNodeRepository())->getVersion($previousVersionId) : null;
+        dump('$previousVersion',$previousVersion);
         if ($previousVersion) {
             if ($previousVersion->page_id != $pageId) {
                 throw new \Exception("Page id mismatch");
@@ -45,10 +46,14 @@ class VerdantPage
                 if ($node->type != $type) {
                     throw new \Exception("Node type mismatch");
                 }
+                if (!$sortOrder)
+                    $sortOrder = $node->sortOrder || time() << 16;
             } else {
                 (new VerdantPageNodeRepository())->insert($nodeId);
             }
         }
+        if (!$sortOrder)
+            $sortOrder = time() << 16;
         return (new VerdantPageNodeRepository())->insertVersion($nodeId, $previousVersionId, $type, $content, $pageId, $sortOrder);
     }
     public function deleteNode(string $nodeId)

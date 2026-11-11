@@ -44,6 +44,10 @@
                 <value lang="en">Download Word</value>
                 <value lang="pl">Pobierz Word</value>
             </node>
+            <node name="markdown">
+                <value lang="en">Download Markdown</value>
+                <value lang="pl">Pobierz Markdown</value>
+            </node>
         </node>
         <node name="help">
             <value lang="en">Help</value>

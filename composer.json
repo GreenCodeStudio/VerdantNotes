@@ -11,7 +11,8 @@
                   "merge-plugin":  {
                                        "include":  [
                                                        "modules/Authorization/composer.json",
-                                                       "modules/Core/composer.json"
+                                                       "modules/Core/composer.json",
+                                                       "modules/VerdantPage/composer.json"
                                                    ]
                                    }
               }

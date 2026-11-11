@@ -1,0 +1,5 @@
+{
+    "require": {
+        "mkrawczyk/configurable-wysiwyg": "^0.0.6"
+    }
+}

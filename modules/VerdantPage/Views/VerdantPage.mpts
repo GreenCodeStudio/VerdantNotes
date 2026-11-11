@@ -31,9 +31,10 @@
                 <section>
                     <h3>{{t('VerdantPage.ribbon.export')}}</h3>
                     <div>
-                    <a href="/VerdantPage/rtf/":page.id class="nativeLink button icon-download"><span>{{t('VerdantPage.ribbon.export.rtf')}}</span></a>
-                    <a href="/VerdantPage/pdf/":page.id class="nativeLink button icon-download"><span>{{t('VerdantPage.ribbon.export.pdf')}}</span></a>
-                    <a href="/VerdantPage/docx/":page.id class="nativeLink button icon-download"><span>{{t('VerdantPage.ribbon.export.word')}}</span></a>
+                        <a href="/VerdantPage/rtf/":page.id class="nativeLink button icon-download"><span>{{t('VerdantPage.ribbon.export.rtf')}}</span></a>
+                        <a href="/VerdantPage/pdf/":page.id class="nativeLink button icon-download"><span>{{t('VerdantPage.ribbon.export.pdf')}}</span></a>
+                        <a href="/VerdantPage/docx/":page.id class="nativeLink button icon-download"><span>{{t('VerdantPage.ribbon.export.word')}}</span></a>
+                        <a href="/VerdantPage/md/":page.id class="nativeLink button icon-download"><span>{{t('VerdantPage.ribbon.export.markdown')}}</span></a>
                     </div>
                 </section>
             </:if>

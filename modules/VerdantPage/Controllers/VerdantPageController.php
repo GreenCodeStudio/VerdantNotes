@@ -4,7 +4,12 @@ namespace VerdantPage\Controllers;
 
 use Common\PageStandardController;
 use Core\Exceptions\NotFoundException;
+use Mkrawczyk\ConfigurableWysiwyg\Converters\ToHtmlConverter;
+use Mkrawczyk\ConfigurableWysiwyg\Converters\ToPlaintextConverter;
+use Mkrawczyk\ConfigurableWysiwyg\Elements\Paragraph;
+use VerdantPage\ConfigurableWysiwygHelper;
 use VerdantPage\Exporters\DocxExporter;
+use VerdantPage\Exporters\MarkdownExporter;
 use VerdantPage\Exporters\RtfExporter;
 use VerdantPage\VerdantPage;
 
@@ -82,6 +87,17 @@ startxref
         exit;
     }
 
+    public function md(string $id)
+    {
+        $page = (new VerdantPage())->getToShow($id);
+        if (!$page) throw new NotFoundException();
+        ob_end_clean();
+        header('Content-Type: text/markdown');
+        MarkdownExporter::export($page);
+        ob_end_flush();
+        exit;
+    }
+
     public function docx(string $id)
     {
         $page = (new VerdantPage())->getToShow($id);
@@ -102,7 +118,9 @@ startxref
             return '<section>'.htmlspecialchars($node->content->text).'</section>';
         } else if ($node->type === 'text/xml+configurable-wysiwyg') {
             if ($canEdit) {
-                return '<section data-node="'.htmlspecialchars(json_encode($node)).'">'.htmlspecialchars($node->content?->xml).'</section>';
+                $document = \Mkrawczyk\ConfigurableWysiwyg\Document::loadXmlString($node->content?->xml);
+                $document->config = ConfigurableWysiwygHelper::getConfig();
+                return '<section data-node="'.htmlspecialchars(json_encode($node)).'">'.(new ToHtmlConverter())->convert($document).'</section>';
             }
             return '<section>'.htmlspecialchars($node->content->xml).'</section>';
         }

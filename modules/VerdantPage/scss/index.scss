@@ -170,11 +170,31 @@
                 }
             }
 
-            &:has(>div>:nth-child(3)) {
+            &:has(>div>:nth-child(3)):not(:has(>div>:nth-child(4)))  {
                 width: 330px;
                 @container (min-width: 320px) {
                     > div {
                         grid-template-columns: 1fr 1fr 1fr;
+
+                        button, .button {
+                            flex-direction: column;
+
+                            &::before {
+                                flex-grow: 1;
+                                align-items: center;
+                                justify-items: center;
+                                display: flex;
+                                font-size: 40px;
+                            }
+                        }
+                    }
+                }
+            }
+            &:has(>div>:nth-child(4)) {
+                width: 410px;
+                @container (min-width: 400px) {
+                    > div {
+                        grid-template-columns: 1fr 1fr 1fr 1fr;
 
                         button, .button {
                             flex-direction: column;

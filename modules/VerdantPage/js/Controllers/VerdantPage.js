@@ -63,7 +63,7 @@ export class show {
                         xml: newTextNode.getXml()
                     }
                 }
-                const promise = Ajax.VerdantPage.updateNode(node.node_id, null, node.type, node.content, this.pageId, (getServerDate() / 1000) << 16);
+                const promise = Ajax.VerdantPage.updateNode(node.node_id, null, node.type, node.content, this.pageId, (getServerDate() / 1000) *(1<<16));
                 if (needRedirect) {
                     await promise;
                     pageManager.goto(`/VerdantPage/show/${this.pageId}?edit`);
@@ -78,8 +78,8 @@ export class show {
             newTextNode.clear();
         }
         this.article.append(newTextNode);
-        const editBtn= this.page.querySelector('.editBtn');
-        if(editBtn) {
+        const editBtn = this.page.querySelector('.editBtn');
+        if (editBtn) {
             editBtn.classList.add('active');
             editBtn.disabled = true;
         }
@@ -153,9 +153,7 @@ export class show {
                     Ajax.VerdantPage.deleteNode(node.node_id);
                 }
             }
-            const sortGrabber = document.createElement('div');
-            sortGrabber.classList.add('sortGrabber');
-            nodeElement.prepend(sortGrabber);
+            this.generateSortGrabber(nodeElement);
         } else if (node.type == 'text/xml+configurable-wysiwyg') {
             const editor = new ConfigurableWysiwygEditor();
             editor.addAllowedElement(new Paragraph());
@@ -178,9 +176,8 @@ export class show {
             while (nodeElement.firstChild) {
                 nodeElement.removeChild(nodeElement.firstChild);
             }
-            const sortGrabber = document.createElement('div');
-            sortGrabber.classList.add('sortGrabber');
-            nodeElement.append(sortGrabber);
+
+            this.generateSortGrabber(nodeElement);
             nodeElement.append(editor);
             editor.loadXml(node.content.xml);
         }
@@ -219,5 +216,51 @@ export class show {
             warning.textContent = 'You are not logged in. Changes will be saved after you log in or create an account.';
             this.page.insertBefore(warning, this.page.querySelector('article'));
         }
+    }
+    generateSortGrabber(nodeElement){
+        const sortGrabber = document.createElement('div');
+        sortGrabber.classList.add('sortGrabber');
+        nodeElement.prepend(sortGrabber);
+        sortGrabber.addEventListener('pointerdown', eDown => {
+            console.log('pointerdown', eDown);
+            const moveHandler = e => {
+                console.log('pointermove', e);
+                nodeElement.style.position = 'relative';
+                nodeElement.style.left = 0;
+                nodeElement.style.top = e.clientY - eDown.clientY + 'px';
+            }
+            const upHandler = e => {
+                console.log('pointerup', e);
+                document.removeEventListener('pointermove', moveHandler);
+                document.removeEventListener('pointerup', upHandler);
+                nodeElement.style.position = '';
+                nodeElement.style.left = '';
+                nodeElement.style.top = '';
+                const comparedNodes = [...nodeElement.parentNode.children].map(el => ({
+                    diff: el.getBoundingClientRect().top - nodeElement.getBoundingClientRect().top - e.clientY + eDown.clientY,
+                    el
+                }))
+                console.log('comparedNodes', comparedNodes)
+                const closestNode = comparedNodes.reduce((prev, curr) => Math.abs(curr.diff) < Math.abs(prev.diff) ? curr : prev);
+                console.log('closestNode', closestNode)
+                if (closestNode.el != nodeElement) {
+                    if (closestNode.diff < 0) {
+                        closestNode.el.parentNode.insertBefore(nodeElement, closestNode.el.nextSibling);
+                    } else {
+                        closestNode.el.parentNode.insertBefore(nodeElement, closestNode.el);
+                    }
+                    const prevSort=nodeElement.previousElementSibling?.dataset.node ? JSON.parse(nodeElement.previousElementSibling.dataset.node).sortOrder : 0;
+                    const nextSort=nodeElement.nextElementSibling?.dataset.node ? JSON.parse(nodeElement.nextElementSibling.dataset.node).sortOrder : (getServerDate() / 1000) *(1<<16);
+                    console.log('prevSort',prevSort,'nextSort',nextSort)
+                    const newSortOrder = (prevSort + nextSort) / 2;
+                    const node = JSON.parse(nodeElement.dataset.node);
+                    node.sortOrder = newSortOrder;
+                    nodeElement.dataset.node = JSON.stringify(node);
+                    Ajax.VerdantPage.updateNode(node.node_id, node.verdant_page_node_version_id, node.type, node.content, this.pageId, newSortOrder);
+                }
+            }
+            document.addEventListener('pointermove', moveHandler);
+            document.addEventListener('pointerup', upHandler);
+        });
     }
 }
