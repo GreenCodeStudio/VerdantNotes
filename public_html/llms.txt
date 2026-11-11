@@ -1,0 +1,9 @@
+# VerdantNotes - LLM Context Guide
+
+## What is VerdantNotes?
+
+VerdantNotes is a modern, web-based note-taking and knowledge management application designed to help users organize, create, and manage their digital notes efficiently. The application provides a clean, intuitive interface for capturing ideas, organizing information, and building a personal knowledge base.
+
+**Website**: https://verdantnotes.green-code.studio/
+**Organization**: Green Code Studio
+**Contact**: contact@green-code.studio
