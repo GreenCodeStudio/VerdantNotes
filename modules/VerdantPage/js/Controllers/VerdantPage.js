@@ -30,6 +30,21 @@ export class show {
         if ('edit' in data._query || sessionStorage.isEditEnabled == '1') {
             this.startEdit();
         }
+        if ('modelContext' in document) {
+            document.modelContext.registerTool({
+                name: 'startEdit',
+                description: 'Starts editing the page',
+                inputSchema: {
+                    type: 'object',
+                    properties: {},
+                    required: [],
+                },
+                execute: async () => {
+                    this.startEdit();
+                    return `Started editing the page`;
+                },
+            })
+        }
     }
 
     startEdit() {
@@ -63,7 +78,7 @@ export class show {
                         xml: newTextNode.getXml()
                     }
                 }
-                const promise = Ajax.VerdantPage.updateNode(node.node_id, null, node.type, node.content, this.pageId, (getServerDate() / 1000) *(1<<16));
+                const promise = Ajax.VerdantPage.updateNode(node.node_id, null, node.type, node.content, this.pageId, (getServerDate() / 1000) * (1 << 16));
                 if (needRedirect) {
                     await promise;
                     pageManager.goto(`/VerdantPage/show/${this.pageId}?edit`);
@@ -118,6 +133,23 @@ export class show {
             }
         }
         sessionStorage.isEditEnabled = '1';
+        if ('modelContext' in document) {
+            document.modelContext.registerTool({
+                name: 'setTitle',
+                description: 'Sets the title of the page',
+                inputSchema: {
+                    type: 'object',
+                    properties: {
+                        title: {type: 'string'}
+                    },
+                    required: ['title'],
+                },
+                execute: async ({title}) => {
+                    await Ajax.VerdantPage.updateTitle(this.pageId, title);
+                    return `Set title to: ${title}`;
+                },
+            });
+        }
     }
 
     initNodeEdit(nodeElement) {
@@ -217,7 +249,8 @@ export class show {
             this.page.insertBefore(warning, this.page.querySelector('article'));
         }
     }
-    generateSortGrabber(nodeElement){
+
+    generateSortGrabber(nodeElement) {
         const sortGrabber = document.createElement('div');
         sortGrabber.classList.add('sortGrabber');
         nodeElement.prepend(sortGrabber);
@@ -249,9 +282,9 @@ export class show {
                     } else {
                         closestNode.el.parentNode.insertBefore(nodeElement, closestNode.el);
                     }
-                    const prevSort=nodeElement.previousElementSibling?.dataset.node ? JSON.parse(nodeElement.previousElementSibling.dataset.node).sortOrder : 0;
-                    const nextSort=nodeElement.nextElementSibling?.dataset.node ? JSON.parse(nodeElement.nextElementSibling.dataset.node).sortOrder : (getServerDate() / 1000) *(1<<16);
-                    console.log('prevSort',prevSort,'nextSort',nextSort)
+                    const prevSort = nodeElement.previousElementSibling?.dataset.node ? JSON.parse(nodeElement.previousElementSibling.dataset.node).sortOrder : 0;
+                    const nextSort = nodeElement.nextElementSibling?.dataset.node ? JSON.parse(nodeElement.nextElementSibling.dataset.node).sortOrder : (getServerDate() / 1000) * (1 << 16);
+                    console.log('prevSort', prevSort, 'nextSort', nextSort)
                     const newSortOrder = (prevSort + nextSort) / 2;
                     const node = JSON.parse(nodeElement.dataset.node);
                     node.sortOrder = newSortOrder;
