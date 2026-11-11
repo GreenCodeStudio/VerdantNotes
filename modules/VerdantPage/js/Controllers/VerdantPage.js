@@ -246,7 +246,7 @@ export class show {
             const warning = document.createElement('div');
             warning.classList.add('articleWarning');
             warning.textContent = 'You are not logged in. Changes will be saved after you log in or create an account.';
-            this.page.insertBefore(warning, this.page.querySelector('article'));
+            this.page.querySelector('article').parentElement.insertBefore(warning, this.page.querySelector('article'));
         }
     }
 
