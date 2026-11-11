@@ -9,3 +9,4 @@ jsBuild.js
 public_html
 .env.local
 package.json
+.agents
