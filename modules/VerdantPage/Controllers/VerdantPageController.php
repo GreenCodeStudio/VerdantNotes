@@ -28,6 +28,10 @@ class VerdantPageController extends PageStandardController
             'isAuthorized' => \Authorization\Authorization::isLogged(),
             'noName' => fn($x, $default) => $x ?: $default
         ]);
+        $this->headLinks[] = ['rel' => 'alternate', 'type' => 'application/pdf', 'title' => 'PDF', 'href' => '/VerdantPage/pdf/'.$page->id];
+        $this->headLinks[] = ['rel' => 'alternate', 'type' => 'application/rtf', 'title' => 'RTF', 'href' => '/VerdantPage/rtf/'.$page->id];
+        $this->headLinks[] = ['rel' => 'alternate', 'type' => 'text/markdown', 'title' => 'Markdown', 'href' => '/VerdantPage/md/'.$page->id];
+        $this->headLinks[] = ['rel' => 'alternate', 'type' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'title' => 'DOCX', 'href' => '/VerdantPage/docx/'.$page->id];
     }
 
     public function pdf(string $id)
