@@ -7,6 +7,8 @@ class McpController extends \Common\PageStandardController
     public function index()
     {
         ob_end_clean();
+//        http_response_code(401);
+        header('WWW-Authenticate: Bearer resource_metadata="'.(($_SERVER['SERVER_PORT']==443)?'https':'http').'://'.$_SERVER['HTTP_HOST'].'/.well-known/oauth-protected-resource"');
         $post = file_get_contents("php://input");
         $request = json_decode($post);
         if ($request->jsonrpc == "2.0") {
