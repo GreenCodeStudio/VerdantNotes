@@ -21,6 +21,14 @@ class McpController extends \Common\PageStandardController
                         "capabilities" => [
                             "tools" => []
                         ],
+                        "cacheScope" => "private",
+                        "ttlMs" => 0,
+                        "_meta" => [
+                            "io.modelcontextprotocol/serverInfo" => [
+                                "name" => "verdant-notes-demo",
+                                "version" => "1.0.0"
+                            ]
+                        ],
                     ]
                 ]);
             } else if ($request->method == 'tools/list') {
