@@ -6,10 +6,10 @@ class McpController extends \Common\PageStandardController
 {
     public function index()
     {
+        ob_end_clean();
         $post = file_get_contents("php://input");
         $request = json_decode($post);
         if ($request->jsonrpc == "2.0") {
-            ob_end_clean();
             header('Content-Type: application/json');
             if ($request->method == 'server/discover') {
                 echo json_encode([
@@ -19,7 +19,7 @@ class McpController extends \Common\PageStandardController
                         "resultType" => "complete",
                         "supportedVersions" => ["2026-07-28"],
                         "capabilities" => [
-                            "tools" => []
+                            "tools" => (object)[]
                         ],
                         "cacheScope" => "private",
                         "ttlMs" => 0,
@@ -37,30 +37,37 @@ class McpController extends \Common\PageStandardController
                     'id' => $request->id,
                     'result' => [
                         "resultType" => "complete",
+                        'ttlMs' => 600000,
+                        'cacheScope' => 'private',
                         "tools" => [
                             [
                                 "name" => "listMyNotebooks",
                                 "title" => "List my notebooks",
                                 "description" => "Lists Verdant Notebooks of the current user",
                                 "inputSchema" => [
-                                    "type" => "object",
-                                    "properties" => [
-
-                                    ],
-                                    "required" => []
-                                ]
+                                    'type' => 'object',
+                                    'properties' => (object)[
+                                        ]
+                                ],
+                                "annotations" => [
+                                    "readOnlyHint" => true,
+                                    "destructiveHint" => false,
+                                    "idempotentHint" => true,
+                                    "openWorldHint" => false
+                                ],
                             ]
                         ]
                     ]
                 ]);
-            }else if ($request->method == 'tools/call') {
-                if ($request->params->toolName == 'listMyNotebooks') {
+            } else if ($request->method == 'tools/call') {
+                if ($request->params->name == 'listMyNotebooks') {
                     echo json_encode([
                         'jsonrpc' => '2.0',
                         'id' => $request->id,
                         'result' => [
                             "resultType" => "complete",
-                            "output" => [
+                            "content"=>[],
+                            "structuredContent" => [
                                 "notebooks" => [
                                     [
                                         "name" => "notebook1",
@@ -86,6 +93,21 @@ class McpController extends \Common\PageStandardController
                         ]
                     ]);
                 }
+            } else if ($request->method == 'initialize') {
+                echo json_encode(
+                    [
+                        "jsonrpc" => "2.0",
+                        "id" => $request->id,
+                        "error" => [
+                            "code" => -32022,
+                            "message" => "Unsupported protocol version",
+                            "data" => [
+                                "supported" => ["2026-07-28"],
+                                "requested" => $request->params->protocolVersion
+                            ]
+                        ]
+                    ]
+                );
             } else {
                 dump($request);
                 echo json_encode([
@@ -97,9 +119,12 @@ class McpController extends \Common\PageStandardController
                     ]
                 ]);
             }
-
-            exit;
         }
-        dump($post);
+        ob_flush();
+    }
+
+    public function postAction()
+    {
+        //do nothing, this is a JSON-RPC endpoint
     }
 }
