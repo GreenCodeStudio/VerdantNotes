@@ -28,6 +28,10 @@
                 <value lang="en">Edit page</value>
                 <value lang="pl">Edytuj stronę</value>
             </node>
+            <node name="history">
+                <value lang="en">History</value>
+                <value lang="pl">Historia</value>
+            </node>
         </node>
         <node name="export">
             <value lang="en">Export</value>

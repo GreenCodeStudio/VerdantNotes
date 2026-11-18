@@ -24,6 +24,9 @@
                         <button class="editBtn icon-edit"><span>{{t('VerdantPage.ribbon.page.edit')}}</span></button>
                     </:if>
                     </:if>
+                    <a href="/VerdantPage/history/":page.id class="button">
+                        <span>{{t('VerdantPage.ribbon.page.history')}}</span>
+                    </a>
                 </div>
             </section>
             </:if>
@@ -52,18 +55,20 @@
             << showNode(node) >>
         </:foreach>
     </article>
-    <aside>
-        <h1>
-            {{noName(page.notebook_name , 'Notes bez nazwy')}}
-        </h1>
-        <ul>
-            <:foreach collection=page.notebookPages item=notebookPage>
-                <li>
-                    <a href="/VerdantPage/show/":notebookPage.id  class="asidePageLink" data-id=notebookPage.id >
-                                          {{noName(notebookPage.title , 'Strona bez nazwy')}}
-                                   </a>
-                </li>
-            </:foreach>
-        </ul>
-    </aside>
+    <:if condition=showAside >
+        <aside>
+            <h1>
+                {{noName(page.notebook_name , 'Notes bez nazwy')}}
+            </h1>
+            <ul>
+                <:foreach collection=page.notebookPages item=notebookPage>
+                    <li>
+                        <a href="/VerdantPage/show/":notebookPage.id  class="asidePageLink" data-id=notebookPage.id >
+                                              {{noName(notebookPage.title , 'Strona bez nazwy')}}
+                                       </a>
+                    </li>
+                </:foreach>
+            </ul>
+        </aside>
+    </:if>
 </div>

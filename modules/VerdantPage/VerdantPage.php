@@ -4,6 +4,7 @@ namespace VerdantPage;
 
 use Authorization\Authorization;
 use Common\Guid;
+use DateTime;
 use VerdantPage\Repository\VerdantNotebookRepository;
 use VerdantPage\Repository\VerdantPageNodeRepository;
 use VerdantPage\Repository\VerdantPageRepository;
@@ -14,6 +15,11 @@ class VerdantPage
     public function getToShow(string $id)
     {
         return (new VerdantPageRepository())->getToShow($id);
+    }
+
+    public function getToShowHistory(string $id, DateTime $historyStamp)
+    {
+        return (new VerdantPageRepository())->getToShowHistory($id, $historyStamp);
     }
 
     public function canEditNode(string $nodeId)
@@ -106,5 +112,10 @@ class VerdantPage
         $details->id = Guid::create();
         $details->title = $title;
         $repository->insertDetails((array)$details);
+    }
+
+    public function getHistory(string $id)
+    {
+        return (new VerdantPageRepository())->getHistory($id);
     }
 }

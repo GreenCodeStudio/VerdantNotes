@@ -30,7 +30,8 @@ class VerdantPageNodeRepository
             'type' => $type,
             'page_id' => $pageId,
             'sortOrder' => $sortOrder,
-            'isDeleted' => $isDeleted
+            'isDeleted' => $isDeleted,
+            'stamp' => date('Y-m-d H:i:s')
         ]);
         DB::update('verdant_page_node', ['verdant_page_node_version_id' => $versionGuid], $nodeId);
         return $versionGuid;

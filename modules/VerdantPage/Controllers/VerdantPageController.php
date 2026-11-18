@@ -15,18 +15,23 @@ use VerdantPage\VerdantPage;
 
 class VerdantPageController extends PageStandardController
 {
-    public function show(string $id)
+    public function show(string $id, ?string $historyStamp = null)
     {
-        $page = (new VerdantPage())->getToShow($id);
+        if($historyStamp) {
+            $page = (new VerdantPage())->getToShowHistory($id, new \DateTime($historyStamp));
+        }else{
+            $page = (new VerdantPage())->getToShow($id);
+        }
         if (!$page) throw new NotFoundException();
 
         $canEdit = $page->public_permissions_edit || (\Authorization\Authorization::isLogged() && $page->notebook_owner_id === \Authorization\Authorization::getUserId());
         $this->addView('VerdantPage', 'VerdantPage', [
             'page' => $page,
             'showNode' => fn($x) => $this->showNode($x, $canEdit),
-            'canEdit' => $canEdit,
+            'canEdit' => $canEdit && $historyStamp === null,
             'isAuthorized' => \Authorization\Authorization::isLogged(),
-            'noName' => fn($x, $default) => $x ?: $default
+            'noName' => fn($x, $default) => $x ?: $default,
+            'showAside'=>$historyStamp===null
         ]);
         $this->headLinks[] = ['rel' => 'alternate', 'type' => 'application/pdf', 'title' => 'PDF', 'href' => '/VerdantPage/pdf/'.$page->id];
         $this->headLinks[] = ['rel' => 'alternate', 'type' => 'application/rtf', 'title' => 'RTF', 'href' => '/VerdantPage/rtf/'.$page->id];
@@ -133,5 +138,14 @@ startxref
     public function show_data()
     {
         return ['isUserLoggedIn' => \Authorization\Authorization::isLogged()];
+    }
+
+    public function history(string $id)
+    {
+        $changes = (new VerdantPage())->getHistory($id);
+        $this->addView('VerdantPage', 'PageHistory', [
+            'changes' => $changes,
+            'id'=>$id
+        ]);
     }
 }

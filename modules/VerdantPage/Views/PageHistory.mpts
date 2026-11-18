@@ -1,0 +1,11 @@
+<div>
+    <ul>
+        <:foreach collection=changes item=change>
+            <li>
+                <a href="/VerdantPage/show/":id:"/":change.stamp >
+                    {{change.stamp}}
+                </a>
+            </li>
+        </:foreach>
+    </ul>
+</div>
