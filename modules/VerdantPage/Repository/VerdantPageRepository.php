@@ -88,19 +88,20 @@ class VerdantPageRepository
     public function getHistory(string $id)
     {
         return DB::get("
-            SELECT distinct stamp
+            SELECT distinct stamp, u.id as editingUser_id, u.name as editingUser_name
             FROM(
-                SELECT vpnv.stamp
+                SELECT vpnv.stamp, vpnv.editingUser_id
                 FROM verdant_page vp
                 JOIN verdant_page_node_version vpnv ON vpnv.page_id = vp.id
                 WHERE vp.id = :pageId AND vpnv.stamp IS NOT NULL
                 
                 UNION
-                SELECT vpd.stamp
+                SELECT vpd.stamp, vpd.editingUser_id
                 FROM verdant_page vp
                 JOIN verdant_page_details vpd ON vpd.page_id = vp.id
                 WHERE vp.id = :pageId AND vpd.stamp IS NOT NULL
             ) sub
+            LEFT JOIN user u ON u.id = sub.editingUser_id
             ORDER BY stamp ASC   
         ", ['pageId' => $id]);
     }

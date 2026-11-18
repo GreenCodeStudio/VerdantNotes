@@ -33,7 +33,7 @@ class VerdantPage
     public function updateNode(?string $nodeId, ?string $previousVersionId, $type, $content, $pageId, $sortOrder)
     {
         $previousVersion = $previousVersionId ? (new VerdantPageNodeRepository())->getVersion($previousVersionId) : null;
-        dump('$previousVersion',$previousVersion);
+        dump('$previousVersion', $previousVersion);
         if ($previousVersion) {
             if ($previousVersion->page_id != $pageId) {
                 throw new \Exception("Page id mismatch");
@@ -60,12 +60,13 @@ class VerdantPage
         }
         if (!$sortOrder)
             $sortOrder = time() << 16;
-        return (new VerdantPageNodeRepository())->insertVersion($nodeId, $previousVersionId, $type, $content, $pageId, $sortOrder);
+        return (new VerdantPageNodeRepository())->insertVersion($nodeId, $previousVersionId, $type, $content, $pageId, $sortOrder, false, Authorization::isLogged()?Authorization::getUserId():null);
     }
+
     public function deleteNode(string $nodeId)
     {
         $node = (new VerdantPageNodeRepository())->get($nodeId);
-        return (new VerdantPageNodeRepository())->insertVersion($nodeId, $node->previousVersionId, $node->type, null, $node->page_id, $node->sortOrder, true);
+        return (new VerdantPageNodeRepository())->insertVersion($nodeId, $node->previousVersionId, $node->type, null, $node->page_id, $node->sortOrder, true, Authorization::isLogged() ? Authorization::getUserId() : null);
 
     }
 
@@ -84,7 +85,7 @@ class VerdantPage
         ];
     }
 
-    public function createNewPage(string $pageId, ?string $notebookId = null)
+    public function createNewPage(string $pageId, ?string $notebookId = null, ?int $editingUserId = null)
     {
         if ($notebookId === null) {
             $notebookId = Guid::create();
@@ -98,7 +99,8 @@ class VerdantPage
                 'page_id' => $pageId,
                 'notebook_id' => $notebookId,
                 'title' => '',
-                'sortOrder' => time() << 16
+                'sortOrder' => time() << 16,
+                'editingUser_id' => $editingUserId
             ]
         );
 
@@ -111,6 +113,7 @@ class VerdantPage
         $details->previous_details_id = $details->id;
         $details->id = Guid::create();
         $details->title = $title;
+        $details->editingUser_id = Authorization::isLogged() ? Authorization::getUserId() : null;
         $repository->insertDetails((array)$details);
     }
 

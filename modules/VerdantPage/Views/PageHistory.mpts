@@ -1,11 +1,29 @@
-<div>
-    <ul>
-        <:foreach collection=changes item=change>
-            <li>
-                <a href="/VerdantPage/show/":id:"/":change.stamp >
-                    {{change.stamp}}
-                </a>
-            </li>
-        </:foreach>
-    </ul>
+<div class="verdantPageHistory">
+    <table>
+        <thead>
+        <tr>
+            <th>{{t('VerdantPage.history.stamp')}}</th>
+            <th>{{t('VerdantPage.history.user')}}</th>
+        </tr>
+        </thead>
+        <tbody>
+            <:foreach collection=changes item=change>
+                <tr>
+                    <td>
+                        <a href="/VerdantPage/show/":id:"/":change.stamp >
+                            {{change.stamp}}
+                        </a>
+                    </td>
+                    <td>
+                        {{change.editingUser_name}}
+                    </td>
+                    <td>
+                        <a href="/VerdantPage/show/":id:"/":change.stamp class="button">
+                        {{t('VerdantPage.history.show')}}
+                                                </a>
+                    </td>
+                </tr>
+            </:foreach>
+        </tbody>
+    </table>
 </div>

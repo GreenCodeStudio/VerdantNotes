@@ -76,4 +76,18 @@
             <value lang="pl">Strona bez nazwy</value>
         </node>
     </node>
+    <node name="history">
+        <node name="stamp">
+            <value lang="en">Version date and time</value>
+            <value lang="pl">Data i godzina wersji</value>
+        </node>
+        <node name="user">
+            <value lang="en">User</value>
+            <value lang="pl">Użytkownik</value>
+        </node>
+        <node name="show">
+            <value lang="en">Show</value>
+            <value lang="pl">Pokaż</value>
+        </node>
+    </node>
 </root>

@@ -345,3 +345,41 @@
         }
     }
 }
+
+.verdantPageHistory{
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+    table{
+        text-align: left;
+        border-collapse: collapse;
+        thead{
+            tr{
+                th{
+                    padding: 4px 8px;
+                    border-bottom: 1px solid #0002;
+                }
+            }
+        }
+        tbody{
+            tr{
+                &:hover{
+                    background: #0001;
+                }
+                td{
+                    padding: 4px 8px;
+                    border-bottom: 1px solid #0002;
+                    a{
+                        text-decoration: none;
+                        color: inherit;
+                    }
+
+                    a.button{
+                        @include button;
+                    }
+                }
+            }
+        }
+
+    }
+}
