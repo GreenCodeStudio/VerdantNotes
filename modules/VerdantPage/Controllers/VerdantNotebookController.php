@@ -13,8 +13,7 @@ class VerdantNotebookController extends PageStandardController
     public function my()
     {
         $notebooks = (new VerdantNotebook())->getByOwner(Authorization::getUserId());
-        $this->addView('VerdantPage', 'MyNotebooks', ['notebooks' => $notebooks,
-            'noName'=> fn($x, $default) => $x ?: $default]);
+        $this->addView('VerdantPage', 'MyNotebooks', ['notebooks' => $notebooks]);
     }
 
     public function hasPermission(string $methodName)
@@ -28,7 +27,6 @@ class VerdantNotebookController extends PageStandardController
         $this->addView('VerdantPage', 'VerdantNotebook', [
             'notebook' => $notebook,
             'isAuthorized' => \Authorization\Authorization::isLogged(),
-                'noName'=> fn($x, $default) => $x ?: $default
         ]);
     }
 }

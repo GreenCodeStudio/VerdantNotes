@@ -19,8 +19,8 @@
                     </td>
                     <td>
                         <a href="/VerdantPage/show/":id:"/":change.stamp class="button">
-                        {{t('VerdantPage.history.show')}}
-                                                </a>
+                            {{t('VerdantPage.history.show')}}
+                        </a>
                     </td>
                 </tr>
             </:foreach>

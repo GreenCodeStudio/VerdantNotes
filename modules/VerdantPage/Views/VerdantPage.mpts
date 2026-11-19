@@ -1,36 +1,36 @@
 <div class="verdantPageWrapper">
     <div class="ribbon">
         <section class="ribbon-tab">
-            <:if condition=isAuthorized >
-            <section class="ribbon-notebook">
-                <h3>{{t('VerdantPage.ribbon.notebook')}}</h3>
-               <div>
-                <button class="addNotebookButton icon-add-notebook">
-                    <span>
-                    {{t('VerdantPage.ribbon.notebook.add')}}
-                    </span>
-                </button>
-                <a href="/VerdantNotebook/my" class="myMotebooksButton button icon-my-notebooks"><span>{{t('VerdantPage.ribbon.notebook.my')}}</span></a>
-               </div>
-            </section>
-            <section>
-                <h3>{{t('VerdantPage.ribbon.page')}}</h3>
-                <div>
-                <button class="addPageButton icon-add-page"><span>{{t('VerdantPage.ribbon.page.add')}}</span></button>
-
-                    <:if condition=page.id >
-
-                    <:if condition=canEdit>
-                        <button class="editBtn icon-edit"><span>{{t('VerdantPage.ribbon.page.edit')}}</span></button>
-                    </:if>
-                    </:if>
-                    <a href="/VerdantPage/history/":page.id class="button icon-history">
-                        <span>{{t('VerdantPage.ribbon.page.history')}}</span>
-                    </a>
-                </div>
-            </section>
+            <:if isAuthorized>
+                <section class="ribbon-notebook">
+                    <h3>{{t('VerdantPage.ribbon.notebook')}}</h3>
+                   <div>
+                    <button class="addNotebookButton icon-add-notebook">
+                        <span>
+                        {{t('VerdantPage.ribbon.notebook.add')}}
+                        </span>
+                    </button>
+                    <a href="/VerdantNotebook/my" class="myMotebooksButton button icon-my-notebooks"><span>{{t('VerdantPage.ribbon.notebook.my')}}</span></a>
+                   </div>
+                </section>
             </:if>
-            <:if condition=page.id >
+            <:if (isAuthorized||page.id)>
+                <section>
+                    <h3>{{t('VerdantPage.ribbon.page')}}</h3>
+                    <div>
+                        <button class="addPageButton icon-add-page"><span>{{t('VerdantPage.ribbon.page.add')}}</span></button>
+                        <:if page.id>
+                            <:if condition=canEdit>
+                                <button class="editBtn icon-edit"><span>{{t('VerdantPage.ribbon.page.edit')}}</span></button>
+                            </:if>
+                            <a href="/VerdantPage/history/":page.id class="button icon-history">
+                                <span>{{t('VerdantPage.ribbon.page.history')}}</span>
+                            </a>
+                        </:if>
+                    </div>
+                </section>
+            </:if>
+            <:if page.id>
                 <section>
                     <h3>{{t('VerdantPage.ribbon.export')}}</h3>
                     <div>
@@ -55,16 +55,16 @@
             << showNode(node) >>
         </:foreach>
     </article>
-    <:if condition=showAside >
+    <:if showAside >
         <aside>
             <h1>
-                {{noName(page.notebook_name , 'Notes bez nazwy')}}
+                {{page.notebook_name ??? 'Notes bez nazwy'}}
             </h1>
             <ul>
                 <:foreach collection=page.notebookPages item=notebookPage>
                     <li>
                         <a href="/VerdantPage/show/":notebookPage.id  class="asidePageLink" data-id=notebookPage.id >
-                                              {{noName(notebookPage.title , 'Strona bez nazwy')}}
+                                              {{notebookPage.title ??? 'Strona bez nazwy'}}
                                        </a>
                     </li>
                 </:foreach>

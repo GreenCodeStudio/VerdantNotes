@@ -17,9 +17,9 @@ class VerdantPageController extends PageStandardController
 {
     public function show(string $id, ?string $historyStamp = null)
     {
-        if($historyStamp) {
+        if ($historyStamp) {
             $page = (new VerdantPage())->getToShowHistory($id, new \DateTime($historyStamp));
-        }else{
+        } else {
             $page = (new VerdantPage())->getToShow($id);
         }
         if (!$page) throw new NotFoundException();
@@ -30,7 +30,6 @@ class VerdantPageController extends PageStandardController
             'showNode' => fn($x) => $this->showNode($x, $canEdit),
             'canEdit' => $canEdit && $historyStamp === null,
             'isAuthorized' => \Authorization\Authorization::isLogged(),
-            'noName' => fn($x, $default) => $x ?: $default,
             'showAside'=>$historyStamp===null
         ]);
         $this->headLinks[] = ['rel' => 'alternate', 'type' => 'application/pdf', 'title' => 'PDF', 'href' => '/VerdantPage/pdf/'.$page->id];
@@ -145,7 +144,7 @@ startxref
         $changes = (new VerdantPage())->getHistory($id);
         $this->addView('VerdantPage', 'PageHistory', [
             'changes' => $changes,
-            'id'=>$id
+            'id' => $id
         ]);
     }
 }
