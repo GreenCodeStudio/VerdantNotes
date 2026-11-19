@@ -149,6 +149,26 @@
             //    }
             //
             //}
+            &:has(>div>:nth-child(1)):not(:has(>div>:nth-child(2))) {
+                width: 150px;
+                @container (min-width: 140px) {
+                    > div {
+                        grid-template-columns: 1fr;
+
+                        button, .button {
+                            flex-direction: column;
+
+                            &::before {
+                                flex-grow: 1;
+                                align-items: center;
+                                justify-items: center;
+                                display: flex;
+                                font-size: 40px;
+                            }
+                        }
+                    }
+                }
+            }
             &:has(>div>:nth-child(2)):not(:has(>div>:nth-child(3))) {
                 width: 250px;
                 @container (min-width: 240px) {

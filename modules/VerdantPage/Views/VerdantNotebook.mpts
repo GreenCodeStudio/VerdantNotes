@@ -2,24 +2,32 @@
     <div class="ribbon">
         <section class="ribbon-tab">
             <:if isAuthorized>
-                <section>
-                    <h3>Notes</h3>
+                <section class="ribbon-notebook">
+                    <h3>{{t('VerdantPage.ribbon.notebook')}}</h3>
                     <div>
-                        <button class="addNotebookButton">Utwórz notes</button>
-                        <a href="/VerdantNotebook/my" class="myMotebooksButton button">Moje notesy</a>
+                        <button class="addNotebookButton icon-add-notebook">
+                            <span>
+                            {{t('VerdantPage.ribbon.notebook.add')}}
+                            </span>
+                        </button>
+                        <a href="/VerdantNotebook/my" class="myMotebooksButton button icon-my-notebooks"><span>{{t('VerdantPage.ribbon.notebook.my')}}</span></a>
                     </div>
                 </section>
                 <section>
-                    <h3>Strona</h3>
+                    <h3>{{t('VerdantPage.ribbon.page')}}</h3>
                     <div>
-                        <button class="addPageButton">Utwórz stronę</button>
+                        <button class="addPageButton icon-add-page">
+                            <span>
+                            {{t('VerdantPage.ribbon.page.add')}}
+                            </span>
+                        </button>
                     </div>
                 </section>
             </:if>
             <section>
-                <h3>Help</h3>
+                <h3>{{t('VerdantPage.ribbon.help')}}</h3>
                 <div>
-                    <a href="/VerdantPage/show/f603d4af-11a9-4174-a824-4078520042cc" class="button">About</a>
+                    <a href="/VerdantPage/show/f603d4af-11a9-4174-a824-4078520042cc" class="button icon-about">{{t('VerdantPage.ribbon.help.about')}}</a>
                 </div>
             </section>
         </section>
